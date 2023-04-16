@@ -1,0 +1,47 @@
+extends ../base_page/base
+
+block content 
+    .container.main-page
+        .row
+            .col-8
+                .card
+                    .card-header
+                        h4.mb-0
+                            i.bi.bi-archive.me-2
+                            | Favorites
+                    .card-body
+                        - var table_data = user.favorites
+                        include ../base_page/archives_table
+            .col-4
+
+                .card.mb-4
+                    .card-header
+                        h4.mb-0
+                            i.bi.bi-person.me-2
+                            | Basic Info
+                    .card-body
+                        h6.fw-normal
+                            p.fw-bold.d-inline Name: 
+                            p.d-inline #{user.name}
+                        h6.fw-normal
+                            p.fw-bold.d-inline Email: 
+                            p.d-inline #{user.email}
+                        h6.fw-normal
+                            p.fw-bold.d-inline Afiliation: 
+                            p.d-inline #{user.afiliation}
+
+                .card.mb-4
+                    .card-header
+                        h4.mb-0
+                            i.bi.bi-info-circle.me-2
+                            | Other Info
+                    .card-body
+                        h6.fw-normal
+                            p.fw-bold.d-inline Access: 
+                            p.d-inline #{user.access}
+                        h6.fw-normal
+                            p.fw-bold.d-inline Regsiter Date: 
+                            p.d-inline #{user.register_date}
+                        h6.fw-normal
+                            p.fw-bold.d-inline Last Login Date: 
+                            p.d-inline #{user.last_login}
