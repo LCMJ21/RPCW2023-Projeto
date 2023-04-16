@@ -1,8 +1,28 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+a {
+    text-decoration: none;
+}
+.login-page {
+    width: 100%;
+    height: 100vh;
+    display: inline-block;
+    display: flex;
+    align-items: center;
+}
+.form-right i {
+    font-size: 100px;
 }
 
-a {
-  color: #00B7FF;
+.main-page {
+    margin-top: 3%;
+}
+
+.main-page .card-header {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #212529;
+    color: #ffffff;
+}
+
+.align-self-center {
+    align-self: center !important;
 }

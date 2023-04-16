@@ -9,6 +9,10 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+// Bootstrap path includes
+app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
+app.use('/icons', express.static(__dirname + '/node_modules/bootstrap-icons/font'));
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
