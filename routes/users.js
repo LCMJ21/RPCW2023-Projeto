@@ -21,7 +21,8 @@ router.get('/user', function(req, res, next) {
     access: "Admin",
     register_date: "2021-01-01",
     last_login: "2021-01-01",
-    favorites: [
+    favorites: [1,2,3],
+    acordoes: [
       {
         id: 1,
         name: "Example 1",

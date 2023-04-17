@@ -1,6 +1,13 @@
-extends base_page/base
+extends components/base
 block content
-    .container
+    .container.main-page
         .row
             .col-12
-                a.btn.btn-primary.px-4.float-end.mt-4(href="/users/user") User Page
+                .card
+                    .card-header
+                        h4.mb-0
+                            i.bi.bi-archive.me-2
+                            | Favorites
+                    .card-body
+                        - var table_data = acordoes
+                        include components/archives_table

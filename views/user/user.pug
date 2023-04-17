@@ -1,4 +1,4 @@
-extends ../base_page/base
+extends ../components/base
 
 block content 
     .container.main-page
@@ -10,8 +10,8 @@ block content
                             i.bi.bi-archive.me-2
                             | Favorites
                     .card-body
-                        - var table_data = user.favorites
-                        include ../base_page/archives_table
+                        - var table_data = user.acordoes
+                        include ../components/archives_table
             .col-4
 
                 .card.mb-4
@@ -40,7 +40,7 @@ block content
                             p.fw-bold.d-inline Access: 
                             p.d-inline #{user.access}
                         h6.fw-normal
-                            p.fw-bold.d-inline Regsiter Date: 
+                            p.fw-bold.d-inline Register Date: 
                             p.d-inline #{user.register_date}
                         h6.fw-normal
                             p.fw-bold.d-inline Last Login Date: 
