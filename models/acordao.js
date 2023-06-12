@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const acordaoSchema = new mongoose.Schema({
+const accordionSchema = new mongoose.Schema({
     '1ª Pág. de Publicação do Acordão': String,
     Acordão: String,
     'Ano da Publicação': String,
@@ -96,4 +96,4 @@ const acordaoSchema = new mongoose.Schema({
     'Área Temática 2': String,
 });
 
-module.exports = mongoose.model('acordao', acordaoSchema);
+module.exports = mongoose.model('accordion', accordionSchema);

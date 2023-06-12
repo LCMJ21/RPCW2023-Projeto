@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 
-var mongoDB = 'mongodb://127.0.0.1/TPteste';
+var mongoDB = 'mongodb://127.0.0.1/JusticeDB';
 
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 var db = mongoose.connection;
@@ -16,7 +16,7 @@ db.on('open', function () {
     console.log('Conexão ao MongoDB realizada com sucesso...');
 });
 
-var indexRouter = require('./routes/index');
+var accordionsRouter = require('./routes/accordions');
 var usersRouter = require('./routes/users');
 
 var app = express();
@@ -38,7 +38,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/', accordionsRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler

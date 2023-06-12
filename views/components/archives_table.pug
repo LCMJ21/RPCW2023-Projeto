@@ -3,15 +3,21 @@ block table
         thead
             tr
                 th.col Id
-                th.col Name
-                th.col Description
+                th.col Accordion
+                th.col Autor
+                th.col Data
+                th.col Topic
+                th.col Court
                 th.col
         tbody
-            each elem in table_data
+            each elem in table_data.results
                 tr
                     th(scope="row") #{elem.id}
-                    td #{elem.name}
-                    td #{elem.description}
+                    td #{elem.Acordão}
+                    td #{elem.Autor}
+                    td #{elem.Data}
+                    td #{elem.Tema}
+                    td #{elem.Tribunal}
                     td.text-end
                         if elem.id in user.favorites
                             input.btn-check(type="checkbox" id="favorite-" + elem.id checked)
@@ -21,3 +27,6 @@ block table
                             input.btn-check(type="checkbox" id="favorite-" + elem.id)
                             label.btn.btn-outline-warning(for="favorite-" + elem.id)
                                 i.bi.bi-star
+
+    block pagination
+        include pagination

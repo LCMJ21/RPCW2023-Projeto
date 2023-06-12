@@ -1,0 +1,31 @@
+block pagination
+    .d-flex.flex-row.align-items-center
+        p.mb-0 #{table_data.currentElems} of #{table_data.totalElems} #{data_name}
+
+        nav.ms-auto
+            ul.pagination.mb-0
+                if table_data.currentPage != 1
+                    li.page-item
+                        a.page-link(href="?page=1") First
+                    li.page-item
+                        a.page-link(href="?page=" + (table_data.currentPage - 1)) &lt;
+
+                if table_data.previousPages
+                    each page in table_data.previousPages
+                        li.page-item
+                            a.page-link(href="?page=" + page) #{page}
+
+                li.page-item.active
+                    a.page-link.disable() #{table_data.currentPage}
+                
+                if table_data.nextPages
+                    each page in table_data.nextPages
+                        li.page-item
+                            a.page-link(href="?page=" + page) #{page}
+                
+                if table_data.currentPage != table_data.totalPages
+                    li.page-item
+                        a.page-link(href="?page=" + (table_data.currentPage + 1)) &gt;
+                    li.page-item
+                        a.page-link(href="?page=" + table_data.totalPages) Last
+                        
