@@ -1,18 +1,20 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
+var jwt = require("jsonwebtoken");
+const { verificaAcesso } = require("./security");
 
 /* GET users listing. */
-router.get('/login', function(req, res, next) {
-  res.render('user/login', { title: 'Justice login' });
+router.get("/login", function (req, res, next) {
+  res.render("user/login", { title: "Justice login" });
 });
 
 /* GET users listing. */
-router.get('/register', function(req, res, next) {
-  res.render('user/register', { title: 'Justice register' });
+router.get("/register", function (req, res, next) {
+  res.render("user/register", { title: "Justice register" });
 });
 
 /* GET users listing. */
-router.get('/user', function(req, res, next) {
+router.get("/user", verificaAcesso, function (req, res, next) {
   example_user = {
     name: "John Doe",
     email: "johndoe@gmail.com",
@@ -21,7 +23,7 @@ router.get('/user', function(req, res, next) {
     access: "Admin",
     register_date: "2021-01-01",
     last_login: "2021-01-01",
-    favorites: [1,2,3],
+    favorites: [1, 2, 3],
     acordoes: [
       {
         id: 1,
@@ -37,7 +39,7 @@ router.get('/user', function(req, res, next) {
       },
     ],
   };
-  res.render('user/user', { title: 'Justice user', user: example_user});
+  res.render("user/user", { title: "Justice user", user: example_user });
 });
 
 module.exports = router;
