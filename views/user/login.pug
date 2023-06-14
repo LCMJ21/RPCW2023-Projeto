@@ -5,38 +5,38 @@ block content
     .login-page.bg-light
         .container
             .row
-              .col-lg-10.offset-lg-1
-                h3.mb-3.card
-                    .bg-white.shadow.rounded
-                        .row
-                            .col-md-7.pe-0
-                                .form-left.h-100.py-5.px-5
-                                    .h1.mb-4 Sign In
-                                    form.row.fs-4.fw-normal.g-4(action='')
+                .col-lg-10.offset-lg-1
+                    h3.mb-3.card
+                        .bg-white.shadow.rounded
+                            .row
+                                .col-md-7.pe-0
+                                    .form-left.h-100.py-5.px-5
+                                        .h1.mb-4 Sign In
+                                        form.row.fs-4.fw-normal.g-4(method='POST' action='/users/login' )
 
-                                        .col-12
-                                            label(for='username') Username
-                                                .input-group
-                                                    .input-group-text
-                                                        i.bi.bi-person-fill
-                                                    input.form-control(type='text', placeholder='Username')
+                                            .col-12
+                                                label(for='username') Username
+                                                    .input-group
+                                                        .input-group-text
+                                                            i.bi.bi-person-fill
+                                                        input.form-control(type='text' placeholder='Username' required name='username')
 
-                                        .col-12
-                                            label(for='password') Password
-                                                .input-group
-                                                    .input-group-text
-                                                        i.bi.bi-lock-fill
-                                                    input.form-control(type='text', placeholder='Password')
+                                            .col-12
+                                                label(for='password') Password
+                                                    .input-group
+                                                        .input-group-text
+                                                            i.bi.bi-lock-fill
+                                                        input.form-control(type='password' placeholder='Password' required name='password')
 
-                                        .col-8.fs-6.align-self-center
-                                            a.text-primary(href='#')
-                                                p Forgot Password?
-                                            a.text-primary(href='/users/register')
-                                                p No account? Sign up!
+                                            .col-8.fs-6.align-self-center
+                                                a.text-primary(href='#')
+                                                    p Forgot Password?
+                                                a.text-primary(href='/users/register')
+                                                    p No account? Sign up!
 
-                                        .col-4
-                                            button.btn.btn-primary.px-4.float-end(type='submit') Login
-                                            
-                            .col-md-5.ps-0.d-none.d-md-block
-                                .form-right
-                                    img(src='/images/login_img.jpg', width='100%', height='450px')
+                                            .col-4
+                                                button.btn.btn-primary.px-4.float-end(type='submit') Login
+
+                                .col-md-5.ps-0.d-none.d-md-block
+                                    .form-right
+                                        img(src='/images/login_img.jpg' width='100%' height='450px')

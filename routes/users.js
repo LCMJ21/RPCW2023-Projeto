@@ -1,6 +1,8 @@
 var express = require("express");
 var router = express.Router();
 var jwt = require("jsonwebtoken");
+var userModel = require("../models/user");
+var passport = require("passport");
 const { verificaAcesso } = require("./security");
 
 /* GET users listing. */
@@ -40,6 +42,44 @@ router.get("/user", verificaAcesso, function (req, res, next) {
     ],
   };
   res.render("user/user", { title: "Justice user", user: example_user });
+});
+
+router.post(
+  "/login",
+  passport.authenticate("local"),
+  function (req, res, next) {
+    jwt.sign(
+      { username: req.user.username, level: req.user.level, sub: "Justice" },
+      "justiceApp",
+      { expiresIn: "1h" },
+
+      function (e, token) {
+        if (e)
+          res.status(500).jsonp({ error: "Erro na geração do token: " + e });
+        else res.render("/user/login", { token: token });
+      }
+    );
+  }
+);
+
+router.post("/register", function (req, res, next) {
+  var data = new Date().toISOString().substring(0, 16);
+  userModel.register(
+    new userModel({
+      username: req.body.username,
+      name: req.body.name,
+      afiliation: req.body.afiliation,
+      dateCreated: data,
+    }),
+    req.body.password,
+    function (err, user) {
+      if (err)
+        res
+          .status(520)
+          .jsonp({ error: err, message: "Register error: " + err });
+      else res.redirect("/users/login");
+    }
+  );
 });
 
 module.exports = router;
