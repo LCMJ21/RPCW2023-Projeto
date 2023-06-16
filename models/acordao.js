@@ -88,7 +88,6 @@ const accordionSchema = new mongoose.Schema({
   "Volume dos Acordãos do T.C.": String,
   Votação: String,
   "Voto Vencido": String,
-  _id: String,
   tribunal: String,
   url: String,
   "Área Temática": String,
