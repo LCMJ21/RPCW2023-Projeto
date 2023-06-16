@@ -22,10 +22,29 @@ router.get("/", async function (req, res, next) {
       const page = Number(req.query.page || "1");
       const perPage = 10;
       const accordions_list = await accordions.list(page, perPage);
-      console.log(accordions_list);
       res.render("homepage", {
         title: "Justice home",
         accordions: accordions_list,
+        user: getUser(),
+      });
+    } else {
+      res.redirect("/users/login");
+    }
+  } catch (err) {
+    res.render("error", { error: err });
+  }
+});
+
+router.get("/accordion/:id", async function (req, res, next) {
+  var logged_in = true;
+  try {
+    if (logged_in) {
+      console.log(req.params.id);
+      const accordion = await accordions.getAccordion(req.params.id);
+      console.log(accordion);
+      res.render("accordion", {
+        title: "Accordion " + accordion.id + " details",
+        accordion: accordion,
         user: getUser(),
       });
     } else {
