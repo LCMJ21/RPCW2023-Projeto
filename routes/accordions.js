@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var accordions = require("../controllers/accordion");
+const { verificaAcesso } = require("./security");
 
 function getUser() {
   return (example_user = {
