@@ -1,7 +1,8 @@
 var jwt = require("jsonwebtoken");
 
 exports.verificaAcesso = (req, res, next) => {
-  var myToken = req.query.token || req.body.token;
+  var myToken = req.cookies["token"];
+
   if (myToken) {
     jwt.verify(myToken, "justiceApp", function (e, payload) {
       if (e) {
@@ -11,6 +12,6 @@ exports.verificaAcesso = (req, res, next) => {
       }
     });
   } else {
-    res.redirect("/user/login");
+    res.redirect("/users/login");
   }
 };

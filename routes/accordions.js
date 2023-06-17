@@ -15,7 +15,7 @@ function getUser() {
   });
 }
 
-router.get("/", async function (req, res, next) {
+router.get("/", verificaAcesso, async function (req, res, next) {
   var logged_in = true;
   try {
     if (logged_in) {
@@ -35,7 +35,7 @@ router.get("/", async function (req, res, next) {
   }
 });
 
-router.get("/accordion/:id", async function (req, res, next) {
+router.get("/accordion/:id", verificaAcesso, async function (req, res, next) {
   var logged_in = true;
   try {
     if (logged_in) {

@@ -5,7 +5,7 @@ block header
 
                 a.d-flex.align-items-center.mb-2.mb-lg-0.text-white.text-decoration-none(href="/")
                     include main_logo
-                        
+
 
                 ul.nav.col-12.col-lg-auto.me-lg-auto.mb-2.justify-content-center.mb-md-0
                     li
@@ -20,6 +20,7 @@ block header
                         a.nav-link.px-2.text-white(href="#") About
 
                 div.d-flex.align-items-center.text-end
-                    button.btn.btn-warning.btn-sm.me-2(type="button") Logout
+                    form(method="POST" action="users/logout" ) 
+                        button.btn.btn-warning.btn-sm.me-2(type="submit") Logout
                     a.text-white(href="/users/user")
                         i.bi.bi-person-square.fs-3
