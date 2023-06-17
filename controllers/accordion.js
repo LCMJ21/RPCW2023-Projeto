@@ -7,7 +7,7 @@ module.exports.list = (page, perPage) => {
 };
 
 module.exports.getAccordion = (id) => {
-  return accordion.findOne({ _id: new ObjectId("648b6c60a18f09293cb6930c") })
+  return accordion.findById(id)
     .then((result) => result)
     .catch((err) => err);
 };
