@@ -6,8 +6,7 @@ module.exports.list = (page, perPage) => {
 };
 
 module.exports.getAccordion = (id) => {
-  return accordion
-    .findOne({ _id: id })
+  return accordion.findById(id)
     .then((result) => result)
     .catch((err) => err);
 };

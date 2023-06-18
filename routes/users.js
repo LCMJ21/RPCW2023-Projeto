@@ -7,6 +7,9 @@ const { verificaAcesso } = require("./security");
 
 /* GET users listing. */
 router.get("/login", function (req, res, next) {
+  if (req.cookies["token"]) {
+    res.redirect("/");
+  }
   res.render("user/login", { title: "Justice login" });
 });
 
@@ -56,7 +59,7 @@ router.post(
       function (e, token) {
         if (e)
           res.status(500).jsonp({ error: "Erro na geração do token: " + e });
-        else res.render("/user/login", { token: token });
+        else res.cookie("token", token).redirect("/");
       }
     );
   }
@@ -80,6 +83,10 @@ router.post("/register", function (req, res, next) {
       else res.redirect("/users/login");
     }
   );
+});
+
+router.post("/logout", function (req, res, next) {
+  res.clearCookie("token").redirect("/users/login");
 });
 
 module.exports = router;

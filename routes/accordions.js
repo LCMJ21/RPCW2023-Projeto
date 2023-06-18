@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var accordions = require("../controllers/accordion");
+const { verificaAcesso } = require("./security");
 
 function getUser() {
   return (example_user = {
@@ -15,7 +16,7 @@ function getUser() {
   });
 }
 
-router.get("/", async function (req, res, next) {
+router.get("/", verificaAcesso, async function (req, res, next) {
   var logged_in = true;
   try {
     if (logged_in) {
@@ -35,7 +36,7 @@ router.get("/", async function (req, res, next) {
   }
 });
 
-router.get("/accordion/:id", async function (req, res, next) {
+router.get("/accordion/:id", verificaAcesso, async function (req, res, next) {
   var logged_in = true;
   try {
     if (logged_in) {
