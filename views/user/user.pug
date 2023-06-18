@@ -10,7 +10,7 @@ block content
             //-                 i.bi.bi-archive.me-2
             //-                 | Favorites
             //-         .card-body
-            //-             - var table_data = user.acordoes
+            //-             - var table_data = user.favorites
             //-             include ../components/archives_table
             .col-4
 
@@ -38,10 +38,10 @@ block content
                     .card-body
                         h6.fw-normal
                             p.fw-bold.d-inline Access: 
-                            p.d-inline #{user.access}
+                            p.d-inline #{user.level}
                         h6.fw-normal
                             p.fw-bold.d-inline Register Date: 
-                            p.d-inline #{user.register_date}
+                            p.d-inline #{user.dateCreated}
                         h6.fw-normal
                             p.fw-bold.d-inline Last Login Date: 
-                            p.d-inline #{user.last_login}
+                            p.d-inline #{user.lastAccess}

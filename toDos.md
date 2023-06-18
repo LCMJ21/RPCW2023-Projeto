@@ -26,7 +26,7 @@ Joao
 # Criar logistica de admin e permite alterar permissoes de utilizadores
 Joao
 
-# Adicionmar campos ao utilizador
+# Adicionar campos ao utilizador (done)
 Joao
 
 # Paginas do utilizador
