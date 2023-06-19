@@ -6,7 +6,7 @@ exports.verificaAcesso = (req, res, next) => {
   if (myToken) {
     jwt.verify(myToken, "justiceApp", function (e, payload) {
       if (e) {
-        res.status(401).jsonp({ error: e });
+        res.clearCookie("token").redirect("/users/login");
       } else {
         next();
       }
@@ -15,3 +15,5 @@ exports.verificaAcesso = (req, res, next) => {
     res.redirect("/users/login");
   }
 };
+
+exports.getJwtPayload = (req) => jwt.decode(req.cookies["token"]);
