@@ -1,0 +1,32 @@
+raw_data/Acordaos-20230325T095454Z-001/Acordaos/jtcampct_acordaos.json
+---------------------
+[object Object]
+-----------------------
+raw_data/Acordaos-20230325T095454Z-001/Acordaos/jdgpj_acordaos.json
+---------------------
+[object Object]
+-----------------------
+raw_data/Acordaos-20230325T095454Z-001/Acordaos/jtcampca_acordaos.json
+---------------------
+[object Object]
+-----------------------
+raw_data/Acordaos-20230325T095454Z-001/Acordaos/atco1_acordaos.json
+---------------------
+[object Object]
+-----------------------
+raw_data/Acordaos-20230325T095454Z-001/Acordaos/jcon_acordaos.json
+---------------------
+[object Object]
+-----------------------
+raw_data/Acordaos-20230325T095454Z-001/Acordaos/jtrc_acordaos.json
+---------------------
+[object Object]
+-----------------------
+raw_data/Acordaos-20230325T095454Z-002/Acordaos/jtre_acordaos.json
+---------------------
+[object Object]
+-----------------------
+raw_data/Acordaos-20230325T095454Z-003/Acordaos/jtrg_acordaos.json
+---------------------
+[object Object]
+-----------------------
