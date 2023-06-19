@@ -1,3 +1,5 @@
+include modal
+
 mixin favorite_button(id, favorites)
     - var checked = favorites.includes(id)
 
@@ -13,5 +15,7 @@ mixin edit_button(id)
         i.bi.bi-pencil-fill
 
 mixin delete_button(id)
-    a.btn.text-danger.remove-border(href="#")
+    - var modal_id = "#deleteAcordian" + id
+    +delete_modal(id)
+    button.btn.text-danger.remove-border(type='button' data-bs-toggle='modal' data-bs-target=modal_id)
         i.bi.bi-x-circle-fill

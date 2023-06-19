@@ -6,5 +6,6 @@ mixin card_entry(key, value)
 
 mixin make_labels(labels)
     if labels
-        for label in labels
-            span.badge.bg-primary.me-1= label
+        .mb-2
+            for label in labels
+                span.badge.bg-primary.me-1= label
