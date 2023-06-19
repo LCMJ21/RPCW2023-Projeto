@@ -1,0 +1,10 @@
+mixin card_entry(key, value)
+    if value
+        h6.fw-normal
+            p.fw-bold.d-inline #{key}: 
+            p.d-inline #{value}
+
+mixin make_labels(labels)
+    if labels
+        for label in labels
+            span.badge.bg-primary.me-1= label

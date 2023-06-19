@@ -19,7 +19,7 @@ const accordionSchema = new mongoose.Schema({
   Decisão: String,
   "Decisão Texto Integral": String,
   "Declaração de Voto": String,
-  Descritores: String,
+  Descritores: Array,
   "Disponível na JTCA": String,
   Espécie: String,
   "Indicações Eventuais": String,
