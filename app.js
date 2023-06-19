@@ -54,6 +54,12 @@ passport.deserializeUser(User.deserializeUser());
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
+// Pug local functions
+/* const getStringFromObjectId = require("./utils").getStringFromObjectId;
+app.locals.getStringFromObjectId = getStringFromObjectId;
+TODO: REMOVED IF NOT NEEDED
+*/
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

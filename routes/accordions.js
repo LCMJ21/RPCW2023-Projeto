@@ -9,10 +9,10 @@ function getUser() {
     email: "johndoe@gmail.com",
     afiliation: "University of Toronto",
     role: "Student",
-    access: "Admin",
+    isAdmin: true,
     register_date: "2021-01-01",
     last_login: "2021-01-01",
-    favorites: [1, 3],
+    favorites: ["648b6c60a18f09293cb6930c", 3],
   });
 }
 
@@ -21,7 +21,7 @@ router.get("/", verificaAcesso, async function (req, res, next) {
   try {
     if (logged_in) {
       const page = Number(req.query.page || "1");
-      const perPage = 10;
+      const perPage = 20;
       const accordions_list = await accordions.list(page, perPage);
       res.render("homepage", {
         title: "Justice home",

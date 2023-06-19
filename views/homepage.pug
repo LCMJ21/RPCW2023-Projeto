@@ -3,12 +3,14 @@ block content
     .container.main-page
         .row
             .col-12
+                include components/breadcrumb
+                    li.breadcrumb-item.active(aria-current="page") Lista de Acordões 
                 .card
                     .card-header
                         h4.mb-0
                             i.bi.bi-archive.me-2
-                            | Archives
+                            | Lista de Acordões
                     .card-body
                         - var table_data = accordions
                         - var data_name = "accordions"
-                        include components/archives_table
+                        include components/accordions_table
