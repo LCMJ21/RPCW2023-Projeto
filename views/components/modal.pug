@@ -1,0 +1,19 @@
+
+mixin delete_modal(id)
+    - var modal_id = "deleteAcordian" + id
+    // Modal
+    .modal.fade(tabindex='-1' id=modal_id aria-labelledby=modal_id aria-hidden='true')
+        .modal-dialog
+            .modal-content.text-dark
+                .modal-header.bg-dark.text-white
+                    h1.modal-title.fs-5(id=modal_id)
+                        i.bi.bi-exclamation-triangle 
+                        | Remover Acordão #{id}?
+                    button.btn-close.btn-close-white(type='button' data-bs-dismiss='modal' aria-label='Close')
+                .modal-body
+                    | Esta ação é irreversível! Tem a certeza que pretende remover o acordão #{id}?
+                .modal-footer
+                    button.btn.btn-dark(type='button' data-bs-dismiss='modal') Close
+                    a.btn.btn-danger(href='/accordion/delete/' + id)
+                            i.bi.bi-exclamation-triangle.me-1
+                            | Remover
