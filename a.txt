@@ -3,7 +3,7 @@
         X "Acordão": "98-280-2",
         X "Processo": "97-0847",
         X "Relator": "NUNES DE ALMEIDA",
-        "Descritores": [
+        X "Descritores": [
             "ACESSO AOS TRIBUNAIS.",
             "PRINCÍPIO DA PROPORCIONALIDADE.",
             "CUSTAS.",
@@ -24,16 +24,30 @@
         X "Sumário": "Remete para os fundamentos dos Acórdãos nºs 1182/96 e 70/98.",
         X "Texto Integral": "",
         X "url": "/atco1.nsf/904714e45043f49b802565fa004a5fd7/2eb96985a6aa4d1e00256862005cffa2?OpenDocument",
-        X "tribunal": "atco1"
-    }
-    {
-        "Tribunal 1ª instância": "TRIBUNAL JUDICIAL DA COMARCA DE BRAGANÇA",
-        "Juízo ou Secção": "JUIZO LOCAL CIVEL DE BRAGANÇA - JUIZ 2",
-        "Tipo de Ação": "AÇÃO INIBITÓRIA",
-        "Tipo de Contrato": "COMPRA E VENDA À DISTÂNCIA",
-        "Autor": "MINISTÉRIO PÚBLICO",
-        "Réu": "COMPRAMAIS (PARCELA AFIRMATIVA, LDA.)",
+        X "tribunal": "atco1",
+        "Ação": "AÇÃO INIBITÓRIA",
         "Data da Decisão": "10/21/2022",
-        "Texto das Cláusulas Abusivas": "Pelo exposto, o Tribunal decide julgar a presente ação totalmente procedente, por provada e, em consequência:\nA. Declarar nula cláusula 3.ª, inserida sob a epígrafe “Alteração das presentes Condições”, constante do clausulado denominado “Termos de Uso – Condições Gerais”, com a seguinte redação: “A Parcela Afirmativa Lda., reserva-se o direito de modificar unilateralmente e em qualquer momento, sem aviso prévio, a apresentação e conteúdo da página Web, os seus serviços e as condições gerais de utilização. Essas modificações servirão para uma melhoria do website, melhorando simultaneamente os serviços oferecidos ao utilizador do website.”, por violação do disposto no artigo 15.º (princípio da boa fé), 16.º, alínea a) e se encontrar preenchida a alínea c) do n.º 1 do artigo 22.º, do Decreto-Lei n.º 3446/85, de 25 de outubro;\nB. Declarar nula a cláusula 6.5ª., último §, inserida sob a epígrafe “6.5. Custos de Envio para Portugal Continental – Promessa de Compra”, constante do clausulado denominado “Termos de Uso – Condições Gerais”, com a seguinte redação: “O levantamento de artigos usados poderá ser efetuado com um custo adicional, mediante consulta. Para mais informações, envie um email para: geral@compramais.pt.”, por violação do princípio da boa fé nos termos do disposto no artigo 15.º do Decreto-Lei n.º 446/85, de 25 de outubro;\nC. Declarar nula a cláusula 6.7ª., § 4, 5 e 6, inserida sob a epígrafe “6.7. Tratamento e entrega do pedido – Promessa de Compra”, constante do clausulado denominado “Termos de Uso – Condições Gerais”, com a seguinte redação: (…) “ATENÇÃO – Após receção da mercadoria confirme sempre o estado da mesma, pelo que não serão consideradas reclamações de material danificado após entrega, sem que esteja devidamente documentado na guia de transporte entregue pelo colaborador da empresa transportadora. Todos os artigos são entregues em embalagens seguras. Se detetar danos externos do produto deverá reportar esse defeito ao transportador, no momento da entrega, fazendo também referência a esse dano no documento comprovativo da entrega. Deverá ainda contactar a nossa Linha de Apoio ao Cliente através do nº. 220 136 085, ou por email: suporte@compramais.pt. Atenção que um comprovativo de entrega sem referência a danos equivale a um produto entregue em embalagem em perfeitas condições” e da e da cláusula 8.4.4.ª, inserida sob a epígrafe “8.4.4. Devoluções por danos de transporte – Devoluções – Direito de Livre Resolução”, Processo: constante do clausulado denominado “Termos de Uso – Condições Gerais”, com a seguinte redação: “Os danos causados pelo transporte deverão, obrigatoriamente, ser denunciados na guia de transporte e reportados num prazo de 24h. Passado este período de tempo a Parcela Afirmativa Lda. não se responsabiliza por qualquer defeito que possa ter ocorrido no transporte”; por violadora do artigo 15.º (princípio da boa fé) e 16.º do Decreto-Lei n.º 3446/85, de 25 de outubro, com referência ainda aos artigos 18.º, alínea c); 19.º, alínea d); 20.º; 21.º, alínea d); 22.º, n.º 1, alínea g);\nD. Declarar nula a cláusula 12.ª, inserida sob a epígrafe “Responsabilidade”, constante do clausulado denominado “Termos de Uso – Condições Gerais”, com a seguinte redação: “A Parcela Afirmativa Lda. não garante a ausência de vírus ou elementos similares em documentos eletrónicos e ficheiros armazenados no seu sistema informático e na sua página web, não se responsabilizando por qualquer dano provocado e derivado da eventual presença de vírus e outros elementos análogos.”, por violadora do artigo 15.º (princípio da boa fé) e 16.º do Decreto-Lei n.º 3446/85, de 25 de outubro, com referência ainda aos artigos 18.º, alíneas a), b) e c); 20.º; 21.º, alínea h) do mesmo diploma declaro nula;",
-        "Recursos": "N",
+        "Tribunal": "CONFLITOS",
+        "Tema": "OUT - Outros",
+        "Legislações": "ART. 7.º DO RGCO; ART. 235.º, N.ºS 1 E 2, DA CRP; ARTS. 5.º, N.ºS 1, E 6.º, N.º 2, DA LEI N.º 75/2013, DE 12-09",
+        "Secção": "CT",
     }
+
+
+Tive a ver os dados e acho que ainda podes mudar/juntar muitas coisas
+Isto foi o que eu estive a ver só em algumas entradas:
+
+Reu, Ator = Requerente, Requerido = Magistrado = Recorrido 1 = Contencioso
+Secção = Juízo ou Secção = Sub-Secção = Tribunal Recurso = (Indicações Eventuais ?)
+Tribunal 1ª instância = Tribunal
+Tipo de Ação = Ação = Peça Processual = Meio Processual ( Tipo de Contrato ???) (Tema ???) (Descritores ??)
+Nº Processo/TAF = Process
+Data do Acordão = Data = Data de Entrada
+Legislação Nacional = Normas Apreciadas + Normas Julgadas Inconst. (Trocar tudo para Legislações ?)
+Decisão Texto Integral = Decisão
+Texto Parcial += Sumário += Texto das Cláusulas Abusivas += Texto Integral (Podese juntar ?)
+Area Tematica * += Descritores
+
+Recursos ???? (tem alguma coisa)
+Parecer Ministério Publico ??? (juntar a alguma coisa)
+Mudar tribunal para tribunal_origem ?
