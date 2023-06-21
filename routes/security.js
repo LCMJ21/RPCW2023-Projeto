@@ -27,13 +27,15 @@ exports.verificaAdminAcesso = (req, res, next) => {
       } else if (payload.level === Level.Admin) {
         next();
       } else {
-        res.render("error", { error: "Acesso negado! Apenas Adminnistradores podem efetuar esta ação." });
+        res.render("error", {
+          error:
+            "Acesso negado! Apenas Adminnistradores podem efetuar esta ação.",
+        });
       }
     });
   } else {
     res.redirect("/users/login");
   }
 };
-
 
 exports.getJwtPayload = (req) => jwt.decode(req.cookies["token"]);

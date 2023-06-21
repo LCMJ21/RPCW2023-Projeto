@@ -16,3 +16,9 @@ module.exports.getUserInfo = async (username) =>
       name: 1,
     }
   );
+
+module.exports.addFavorite = async (username, favorite) =>
+  User.updateOne({ username }, { $push: { favorites: favorite } });
+
+module.exports.removeFavorite = async (username, favorite) =>
+  User.updateOne({ username }, { $pull: { favorites: favorite } });

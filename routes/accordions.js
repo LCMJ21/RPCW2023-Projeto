@@ -1,7 +1,12 @@
 var express = require("express");
 var router = express.Router();
 var accordions = require("../controllers/accordion");
-const { verificaAcesso, verificaAdminAcesso } = require("./security");
+const {
+  verificaAcesso,
+  verificaAdminAcesso,
+  getJwtPayload,
+} = require("./security");
+const { removeFavorite, addFavorite } = require("../controllers/user");
 
 function getUser() {
   return (example_user = {
@@ -44,14 +49,47 @@ router.get("/accordion/:id", verificaAcesso, async function (req, res, next) {
   }
 });
 
-router.get("/accordion/delete/:id", verificaAdminAcesso, async function (req, res, next) {
-  try {
-    await accordions.deleteAccordion(req.params.id);
-    res.redirect("/");
-  } catch (err) {
-    res.render("error", { error: err });
+router.get(
+  "/accordion/delete/:id",
+  verificaAdminAcesso,
+  async function (req, res, next) {
+    try {
+      await accordions.deleteAccordion(req.params.id);
+      res.redirect("/");
+    } catch (err) {
+      res.render("error", { error: err });
+    }
   }
-});
+);
 
+router.get(
+  "/removeFavourite/:id",
+  verificaAcesso,
+  async function (req, res, next) {
+    const username = getJwtPayload(req.cookies.token).username;
+
+    try {
+      await removeFavorite(username, req.params.id);
+      res.redirect("/user");
+    } catch (err) {
+      res.render("error", { error: err });
+    }
+  }
+);
+
+router.get(
+  "/addFavourite/:id",
+  verificaAcesso,
+  async function (req, res, next) {
+    const username = getJwtPayload(req.cookies.token).username;
+
+    try {
+      await addFavorite(username, req.params.id);
+      res.redirect("/user");
+    } catch (err) {
+      res.render("error", { error: err });
+    }
+  }
+);
 
 module.exports = router;
