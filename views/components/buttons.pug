@@ -3,6 +3,7 @@ include modal
 mixin favorite_button(id, favorites)
     - var checked = favorites.includes(id)
 
+
     if checked
         a.btn.text-warning.remove-border(href="/removeFavourite/" + id)
             i.bi.bi-star-fill

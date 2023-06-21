@@ -6,7 +6,11 @@ const {
   verificaAdminAcesso,
   getJwtPayload,
 } = require("./security");
-const { removeFavorite, addFavorite } = require("../controllers/user");
+const {
+  removeFavorite,
+  addFavorite,
+  getUserInfo,
+} = require("../controllers/user");
 
 function getUser() {
   return (example_user = {
@@ -22,6 +26,7 @@ function getUser() {
 }
 
 router.get("/", verificaAcesso, async function (req, res, next) {
+  const user = await getUserInfo(getJwtPayload(req).username);
   try {
     const page = Number(req.query.page || "1");
     const perPage = 20;
@@ -29,7 +34,7 @@ router.get("/", verificaAcesso, async function (req, res, next) {
     res.render("homepage", {
       title: "Justice home",
       accordions: accordions_list,
-      user: getUser(),
+      user,
     });
   } catch (err) {
     res.render("error", { error: err });
@@ -66,11 +71,11 @@ router.get(
   "/removeFavourite/:id",
   verificaAcesso,
   async function (req, res, next) {
-    const username = getJwtPayload(req.cookies.token).username;
+    const username = getJwtPayload(req).username;
 
     try {
       await removeFavorite(username, req.params.id);
-      res.redirect("/user");
+      res.redirect("/");
     } catch (err) {
       res.render("error", { error: err });
     }
@@ -81,11 +86,11 @@ router.get(
   "/addFavourite/:id",
   verificaAcesso,
   async function (req, res, next) {
-    const username = getJwtPayload(req.cookies.token).username;
+    const username = getJwtPayload(req).username;
 
     try {
       await addFavorite(username, req.params.id);
-      res.redirect("/user");
+      res.redirect("/");
     } catch (err) {
       res.render("error", { error: err });
     }

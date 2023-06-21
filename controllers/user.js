@@ -1,9 +1,9 @@
 const User = require("../models/user");
 
-module.exports.lastUpadated = async (username, lastAccess) =>
+module.exports.lastUpadated = (username, lastAccess) =>
   User.updateOne({ username }, { lastAccess });
 
-module.exports.getUserInfo = async (username) =>
+module.exports.getUserInfo = (username) =>
   User.findOne(
     { username },
     {
@@ -17,8 +17,10 @@ module.exports.getUserInfo = async (username) =>
     }
   );
 
-module.exports.addFavorite = async (username, favorite) =>
+module.exports.getUsers = () => User.find();
+
+module.exports.addFavorite = (username, favorite) =>
   User.updateOne({ username }, { $push: { favorites: favorite } });
 
-module.exports.removeFavorite = async (username, favorite) =>
+module.exports.removeFavorite = (username, favorite) =>
   User.updateOne({ username }, { $pull: { favorites: favorite } });

@@ -1,0 +1,26 @@
+include buttons
+
+block table
+    table.table
+        thead
+            tr
+                th.col Username
+                th.col Afiliation
+                th.col level
+                th.col Date Created
+                th.col
+        tbody
+            each elem in table_data
+                tr
+
+                    td #{elem.username}
+                    td #{elem.afiliation}
+                    td #{elem.level}
+                    td #{elem.dateCreated}
+                    td.text-end
+
+
+
+
+    //- block pagination
+    //-     include pagination
