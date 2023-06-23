@@ -1,0 +1,76 @@
+extends components/base
+include components/generic
+include components/buttons
+block content
+    .container.main-page
+        .row
+            .col-12
+                include components/breadcrumb
+                    li.breadcrumb-item(aria-current="page")
+                        a(href="/") Lista de Acordões 
+                    li.breadcrumb-item.active(aria-current="page") Acordão Novo
+                if error
+                    .alert.alert-warning(role="alert")
+                        | #{error}
+                form(action="" method="post")
+                    .d-flex.mb-2
+                        .flex-grow-1.me-2
+                            if error_acordao && error_acordao.labels
+                                +input_labels(input_group.labels, error_acordao.labels)
+                            else
+                                +input_labels(input_group.labels, [])
+                        button.btn.btn-outline-success Adicionar Acordão
+                    .row
+                        .col-8 
+                            .card
+                                .card-header
+                                    h4.mb-0.d-flex.align-items-center
+                                        i.bi.bi-file-earmark-zip.me-2
+                                        .me-auto Acordão Novo
+                                .card-body
+                                    - const list_str_main = JSON.stringify(input_group.main)
+                                    if error_acordao
+                                        +add_acordao_elements_errors(error_acordao, "addButtonMainInfo",input_group.main)
+                                    +make_input_groups(list_str_main, "addButtonMainInfo")
+                        .col-4
+                            .card.mb-3
+                                .card-header
+                                    h4.mb-0
+                                        i.bi.bi-globe.me-2
+                                        | Informação Geral
+                                .card-body
+                                    - const list_str_geral = JSON.stringify(input_group.geral)
+                                    if error_acordao
+                                        +add_acordao_elements_errors(error_acordao, "addButtonGeralInfo",input_group.geral)
+                                    +make_input_groups(list_str_geral, "addButtonGeralInfo")
+                            .card.mb-3
+                                .card-header
+                                    h4.mb-0
+                                        i.bi.bi-person-circle.me-2
+                                        | Entidades Associadas
+                                .card-body
+                                    - const list_str_entidades = JSON.stringify(input_group.entidades)
+                                    if error_acordao
+                                        +add_acordao_elements_errors(error_acordao, "addButtonEntInfo",input_group.entidades)
+                                    +make_input_groups(list_str_entidades, "addButtonEntInfo")
+                            .card.mb-3
+                                .card-header
+                                    h4.mb-0
+                                        i.bi.bi-calendar4-week.me-2
+                                        |  Datas Importantes
+                                .card-body
+                                    - const list_str_datas = JSON.stringify(input_group.datas)
+                                    if error_acordao
+                                        +add_acordao_elements_errors(error_acordao, "addButtonDataInfo",input_group.datas)
+                                    +make_input_groups(list_str_datas, "addButtonDataInfo")
+                            .card.mb-3
+                                .card-header
+                                    h4.mb-0
+                                        i.bi.bi-info-circle.me-2
+                                        |  Outras Informações
+                                .card-body
+                                    - const list_str_outros = JSON.stringify(input_group.outros)
+                                    if error_acordao
+                                        +add_acordao_elements_errors(error_acordao, "addButtoOutrosInfo",input_group.outros)
+                                    +make_input_groups(list_str_outros, "addButtoOutrosInfo")
+
