@@ -21,15 +21,14 @@ exports.verificaAdminAcesso = (req, res, next) => {
   var myToken = req.cookies["token"];
 
   if (myToken) {
-    jwt.decode(myToken, function (e, payload) {
-      if (e) {
+    const payload = jwt.decode(myToken)
+      if (!payload) {
         res.clearCookie("token").redirect("/users/login");
       } else if (payload.level === Level.Admin) {
         next();
       } else {
-        res.render("error", { error: "Acesso negado! Apenas Adminnistradores podem efetuar esta ação." });
+        res.render("error", { message: "Acesso negado! Apenas Adminnistradores podem efetuar esta ação.", error: { status: "403", stack: "" } });
       }
-    });
   } else {
     res.redirect("/users/login");
   }

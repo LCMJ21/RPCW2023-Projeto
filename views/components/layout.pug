@@ -2,10 +2,14 @@ doctype html
 html
   head
     title= title
+    link(rel='icon', href='/images/scales.svg')
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/css/bootstrap.min.css')
     link(rel='stylesheet', href='/icons/bootstrap-icons.css')
+    script(src='/tags/tags.js')
     script(src='/js/bootstrap.bundle.min.js')
+    script(src='/javascripts/utils.js')
+    script(src='/javascripts/import_tags.js' type='module')
   body
     .bg-light
       block header

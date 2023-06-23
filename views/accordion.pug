@@ -8,7 +8,7 @@ block content
                 include components/breadcrumb
                     li.breadcrumb-item(aria-current="page")
                         a(href="/") Lista de Acordões 
-                    li.breadcrumb-item.active(aria-current="page") Acordão #{accordion.id}
+                    li.breadcrumb-item.active(aria-current="page") Acordão #{accordion.Processo}
                 +make_labels(accordion["Descritores"])
                 .row
                     .col-8 
@@ -16,11 +16,11 @@ block content
                             .card-header
                                 h4.mb-0.d-flex.align-items-center
                                     i.bi.bi-file-earmark-zip.me-2
-                                    .me-auto Acordão #{accordion.id}
-                                    +favorite_button(accordion.id, user.favorites)
+                                    .me-auto Acordão #{accordion.Processo}
+                                    +favorite_button(accordion.Processo, user.favorites)
                                     if user.isAdmin
-                                        +edit_button(accordion.id)
-                                        +delete_button(accordion.id)
+                                        +edit_button(accordion.Processo)
+                                        +delete_button(accordion.Processo)
                             .card-body
                                 +card_entry("Sumário", accordion["Sumário"])
                                 +card_entry("Texto Integral", accordion["Texto Integral"])

@@ -9,3 +9,42 @@ mixin make_labels(labels)
         .mb-2
             for label in labels
                 span.badge.bg-primary.me-1= label
+
+mixin add_acordao_elements_errors(old_elements, section, options)
+    - var new_key_key, new_key_value
+    #{section}
+    for value, key in old_elements
+        - var is_section = key.includes(section)
+        if is_section
+            - var is_key = key.split(".")[1] == "key"
+            if is_key
+                - new_key_key = "re"+key
+                - new_key_value = value
+            else
+                - new_value_key = "re"+key
+                .input-group.mb-3(id=new_key_key)
+                    select.form-select(name=new_key_key)
+                        option(value=new_key_value selected)= new_key_value
+                        for option in options
+                            if option != new_key_value
+                                option(value=option)= option
+                    input.form-control(name=new_value_key value=value)
+                    button.btn.btn-outline-danger(type="button" onclick="removeElementById('"+new_key_key+"')") 
+                        i.bi.bi-dash-lg
+
+mixin make_input_groups(list, add_button_id)
+    .d-grid(id=add_button_id)
+        button.btn.btn-outline-primary(onclick="addElement("+list+",'"+add_button_id+"')" type="button")
+            i.bi.bi-plus-circle
+
+mixin input_labels(labels, old_labels)
+    select.form-select(multiple name="labels" data-allow-new="true")
+        option(value="" selected disabled hidden) Select a tag 
+        for label in labels
+            - var is_old = old_labels.includes(label)
+            if is_old
+                option(value=label selected)= label
+            else
+                option(value=label)= label
+    .invalid-feedback
+        | Please select a valid tag.

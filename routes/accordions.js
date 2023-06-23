@@ -2,6 +2,16 @@ var express = require("express");
 var router = express.Router();
 var accordions = require("../controllers/accordion");
 const { verificaAcesso, verificaAdminAcesso } = require("./security");
+const { parse_new_acordao_input } = require("../utils/parse_input")
+
+const input_group = {
+  main : ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
+  geral : ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+  entidades: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+  datas: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+  outros: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+  labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+}
 
 function getUser() {
   return (example_user = {
@@ -31,11 +41,31 @@ router.get("/", verificaAcesso, async function (req, res, next) {
   }
 });
 
-router.get("/accordion/:id", verificaAcesso, async function (req, res, next) {
+router.post("/accordion/new", verificaAcesso, parse_new_acordao_input, function (req, res, next) {
+  if (req.error) {
+    res.render("newAccordion", { title: "Add new accordion", input_group, error_acordao: req.body, error: req.error_msg, user: getUser() });
+  }
+  else{
+    console.log(req.acordao)
+    res.redirect("/accordion/new");
+  }
+});
+
+
+router.get("/accordion/new", verificaAcesso, function (req, res, next) {
+  res.render("newAccordion", { title: "Add new accordion", input_group, user: getUser() });
+});
+
+router.get("/accordion/:processo", verificaAcesso, async function (req, res, next) {
   try {
-    const accordion = await accordions.getAccordion(req.params.id);
+    const processo = req.params.processo;
+    const accordion = await accordions.getAccordion(processo);
+    if (!accordion) {
+      res.status(404).render("error", { error: "Accordion" + processo + "not found" });
+      return;
+    }
     res.render("accordion", {
-      title: "Accordion " + accordion.id + " details",
+      title: "Accordion " + accordion.processo + " details",
       accordion: accordion,
       user: getUser(),
     });
@@ -44,9 +74,9 @@ router.get("/accordion/:id", verificaAcesso, async function (req, res, next) {
   }
 });
 
-router.get("/accordion/delete/:id", verificaAdminAcesso, async function (req, res, next) {
+router.get("/accordion/delete/:processo", verificaAdminAcesso, async function (req, res, next) {
   try {
-    await accordions.deleteAccordion(req.params.id);
+    await accordions.deleteAccordion(req.params.processo);
     res.redirect("/");
   } catch (err) {
     res.render("error", { error: err });

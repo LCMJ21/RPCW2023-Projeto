@@ -4,12 +4,17 @@ block content
         .row
             .col-12
                 include components/breadcrumb
-                    li.breadcrumb-item.active(aria-current="page") Lista de Acordões 
+                    li.breadcrumb-item.active(aria-current="page") Lista de Acordãos 
                 .card
                     .card-header
-                        h4.mb-0
-                            i.bi.bi-archive.me-2
-                            | Lista de Acordões
+                        h4.mb-0.d-flex.align-items-center
+                            .me-auto
+                                i.bi.bi-archive.me-2
+                                | Lista de Acordãos
+                            div
+                                a.btn.btn-primary(href="/accordion/new")
+                                    i.bi.bi-plus-lg.me-1
+                                    | Novo Acordão
                     .card-body
                         - var table_data = accordions
                         - var data_name = "accordions"

@@ -5,14 +5,14 @@ module.exports.list = (page, perPage) => {
   return pagination.paginatedResults(accordion, page, perPage);
 };
 
-module.exports.getAccordion = (id) => {
-  return accordion.findById(id)
+module.exports.getAccordion = (processo) => {
+  return accordion.findOne({ Processo: processo })
     .then((result) => result)
     .catch((err) => err);
 };
 
-module.exports.deleteAccordion = (id) => {
-  return accordion.findByIdAndDelete(id)
+module.exports.deleteAccordion = (processo) => {
+  return accordion.findOneAndDelete({ Processo: processo })
     .then((result) => result)
     .catch((err) => err);
 }

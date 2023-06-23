@@ -1,6 +1,15 @@
-extends components/layout
-
+extends components/base
+include components/generic
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+    .container.main-page
+        .row
+            .col-12
+                .card
+                    .card-header.text-danger
+                        h4.mb-0.d-flex.align-items-center
+                            i.bi.bi-exclamation-triangle.me-2
+                            | Error
+                    .card-body
+                      +card_entry('message',message)
+                      +card_entry('status', error.status)
+                      +card_entry('stack', error.stack)

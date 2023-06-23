@@ -4,29 +4,29 @@ block table
     table.table
         thead
             tr
-                th.col Id
+                th.col Processo
                 th.col Accordion
                 th.col Autor
                 th.col Data
                 th.col Topic
-                th.col Court
+                th.col Tribunal de Origem
                 th.col
         tbody
             each elem in table_data.results
                     tr
                         
                             td
-                                a(href="/accordion/" + elem.id) #{elem.id}
+                                a(href="/accordion/" + elem["Processo"]) #{elem.Processo}
                             td #{elem.Acordão}
                             td #{elem.Autor}
                             td #{elem.Data}
                             td #{elem.Tema}
-                            td #{elem.Tribunal}
+                            td #{elem.tribunal}
                             td.text-end
-                                +favorite_button(elem.id, user.favorites)
+                                +favorite_button(elem.Processo, user.favorites)
                                 if user.isAdmin
-                                    +edit_button(elem.id)
-                                    +delete_button(elem.id)
+                                    +edit_button(elem.Processo)
+                                    +delete_button(elem.Processo)
 
 
     block pagination
