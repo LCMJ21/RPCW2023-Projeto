@@ -10,3 +10,9 @@ module.exports.getAccordion = (id) => {
     .then((result) => result)
     .catch((err) => err);
 };
+
+module.exports.deleteAccordion = (id) => {
+  return accordion.findByIdAndDelete(id)
+    .then((result) => result)
+    .catch((err) => err);
+}

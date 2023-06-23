@@ -1,4 +1,6 @@
 extends components/base
+include components/generic
+include components/buttons
 block content
     .container.main-page
         .row
@@ -7,11 +9,66 @@ block content
                     li.breadcrumb-item(aria-current="page")
                         a(href="/") Lista de Acordões 
                     li.breadcrumb-item.active(aria-current="page") Acordão #{accordion.id}
-                .card
-                    .card-header
-                        h4.mb-0
-                            i.bi.bi-file-earmark-zip.me-2
-                            | Acordão #{accordion.id}
-                    .card-body
-                        #{accordion.id}
+                +make_labels(accordion["Descritores"])
+                .row
+                    .col-8 
+                        .card
+                            .card-header
+                                h4.mb-0.d-flex.align-items-center
+                                    i.bi.bi-file-earmark-zip.me-2
+                                    .me-auto Acordão #{accordion.id}
+                                    +favorite_button(accordion.id, user.favorites)
+                                    if user.isAdmin
+                                        +edit_button(accordion.id)
+                                        +delete_button(accordion.id)
+                            .card-body
+                                +card_entry("Sumário", accordion["Sumário"])
+                                +card_entry("Texto Integral", accordion["Texto Integral"])
+                                +card_entry("Desisão", accordion["Decisão"])
+                    .col-4
+                        .card.mb-3
+                            .card-header
+                                h4.mb-0
+                                    i.bi.bi-globe.me-2
+                                    | Informação Geral
+                            .card-body
+                                +card_entry("Acordão", accordion["Acordão"])
+                                +card_entry("Nº Convencional", accordion["Nº Convencional"])
+                                +card_entry("Processo", accordion["Processo"])
+                                +card_entry("Nº do Documento", accordion["Nº do Documento"])
+                                +card_entry("Data", accordion["Data"])
+                        .card.mb-3
+                            .card-header
+                                h4.mb-0
+                                    i.bi.bi-person-circle.me-2
+                                    | Entidades Associadas
+                            .card-body
+                                +card_entry("Autor", accordion["Autor"])
+                                +card_entry("Requerente", accordion["Requerente"])
+                                +card_entry("Requerido", accordion["Requerido"])
+                                +card_entry("Tribunal de origem", accordion["tribunal"])
+                        .card.mb-3
+                            .card-header
+                                h4.mb-0
+                                    i.bi.bi-calendar4-week.me-2
+                                    |  Datas Importantes
+                            .card-body
+                                +card_entry("Data do Acordão", accordion["Data do Acordão"])
+                        .card.mb-3
+                            .card-header
+                                h4.mb-0
+                                    i.bi.bi-info-circle.me-2
+                                    |  Outras Informações
+                            .card-body
+                                +card_entry("Votação", accordion["Votação"])
+                                +card_entry("Privacidade", accordion["Privacidade"])
+                                +card_entry("Tema", accordion["Tema"])
+                                +card_entry("Especie", accordion["Especie"])
+
+
+
+                    
+
+                            
+                                
                         

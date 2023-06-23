@@ -13,20 +13,20 @@ block table
                 th.col
         tbody
             each elem in table_data.results
-                    tr
-                        
-                            td
-                                a(href="/accordion/" + elem.id) #{elem.id}
-                            td #{elem.Acordão}
-                            td #{elem.Autor}
-                            td #{elem.Data}
-                            td #{elem.Tema}
-                            td #{elem.Tribunal}
-                            td.text-end
-                                +favorite_button(elem.id, user.favorites)
-                                if user.isAdmin
-                                    +edit_button(elem.id)
-                                    +delete_button(elem.id)
+                tr
+
+                    td
+                        a(href="/accordion/" + elem.id) #{elem.id}
+                    td #{elem.Acordão}
+                    td #{elem.Autor}
+                    td #{elem.Data}
+                    td #{elem.Tema}
+                    td #{elem.Tribunal}
+                    td.text-end
+                        +favorite_button(elem.id, user.favorites)
+                        if user.level === "Administrador"
+                            +edit_button(elem.id)
+                            +delete_button(elem.id)
 
 
     block pagination
