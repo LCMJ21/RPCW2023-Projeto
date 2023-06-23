@@ -4,7 +4,11 @@ var jwt = require("jsonwebtoken");
 var userModel = require("../models/user");
 var user = require("../controllers/user");
 var passport = require("passport");
-const { verificaAcesso, getJwtPayload } = require("./security");
+const {
+  verificaAcesso,
+  getJwtPayload,
+  verificaAdminAcesso,
+} = require("./security");
 const { Level } = require("../utils/enums");
 
 /* GET users listing. */
@@ -51,6 +55,13 @@ router.post(
   }
 );
 
+router.get("/permissions", function (req, res, next) {
+  user.getUsers().then((users) => {
+    console.log(users);
+    res.render("user/permissions", { title: "Justice permissions", users });
+  });
+});
+
 router.post("/register", function (req, res, next) {
   var data = new Date().toISOString().substring(0, 16);
   userModel.register(
@@ -60,7 +71,7 @@ router.post("/register", function (req, res, next) {
       email: req.body.email,
       afiliation: req.body.afiliation,
       dateCreated: data,
-      level: Level.Consumer,
+      level: Level.Admin,
       lastAccess: data,
       favorites: [],
     }),

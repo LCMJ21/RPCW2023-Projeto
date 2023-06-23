@@ -34,5 +34,4 @@ exports.verificaAdminAcesso = (req, res, next) => {
   }
 };
 
-
 exports.getJwtPayload = (req) => jwt.decode(req.cookies["token"]);

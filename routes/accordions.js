@@ -1,8 +1,17 @@
 var express = require("express");
 var router = express.Router();
 var accordions = require("../controllers/accordion");
-const { verificaAcesso, verificaAdminAcesso } = require("./security");
 const { parse_new_acordao_input } = require("../utils/parse_input")
+const {
+  verificaAcesso,
+  verificaAdminAcesso,
+  getJwtPayload,
+} = require("./security");
+const {
+  removeFavorite,
+  addFavorite,
+  getUserInfo,
+} = require("../controllers/user");
 
 const input_group = {
   main : ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
@@ -27,6 +36,7 @@ function getUser() {
 }
 
 router.get("/", verificaAcesso, async function (req, res, next) {
+  const user = await getUserInfo(getJwtPayload(req).username);
   try {
     const page = Number(req.query.page || "1");
     const perPage = 20;
@@ -34,7 +44,7 @@ router.get("/", verificaAcesso, async function (req, res, next) {
     res.render("homepage", {
       title: "Justice home",
       accordions: accordions_list,
-      user: getUser(),
+      user,
     });
   } catch (err) {
     res.render("error", { error: err });
@@ -83,5 +93,34 @@ router.get("/accordion/delete/:processo", verificaAdminAcesso, async function (r
   }
 });
 
+router.get(
+  "/removeFavourite/:id",
+  verificaAcesso,
+  async function (req, res, next) {
+    const username = getJwtPayload(req).username;
+
+    try {
+      await removeFavorite(username, req.params.id);
+      res.redirect("/");
+    } catch (err) {
+      res.render("error", { error: err });
+    }
+  }
+);
+
+router.get(
+  "/addFavourite/:id",
+  verificaAcesso,
+  async function (req, res, next) {
+    const username = getJwtPayload(req).username;
+
+    try {
+      await addFavorite(username, req.params.id);
+      res.redirect("/");
+    } catch (err) {
+      res.render("error", { error: err });
+    }
+  }
+);
 
 module.exports = router;
