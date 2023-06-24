@@ -24,3 +24,6 @@ module.exports.addFavorite = (username, favorite) =>
 
 module.exports.removeFavorite = (username, favorite) =>
   User.updateOne({ username }, { $pull: { favorites: favorite } });
+
+module.exports.changePermissions = (username, level) =>
+  User.updateOne({ username }, { level });

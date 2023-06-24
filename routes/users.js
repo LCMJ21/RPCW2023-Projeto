@@ -56,9 +56,23 @@ router.post(
 );
 
 router.get("/permissions", function (req, res, next) {
+  const username = getJwtPayload(req).username;
   user.getUsers().then((users) => {
-    console.log(users);
-    res.render("user/permissions", { title: "Justice permissions", users });
+    res.render("user/permissions", {
+      title: "Justice permissions",
+      users,
+      username,
+    });
+  });
+});
+
+router.post("/changePermissions", function (req, res, next) {
+  const username = req.body.username;
+  const level = req.body.level;
+  console.log(username, level);
+  user.changePermissions(username, level).then((u) => {
+    console.log(u);
+    res.redirect("/users/permissions");
   });
 });
 

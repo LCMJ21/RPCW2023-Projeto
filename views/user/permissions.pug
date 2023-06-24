@@ -11,6 +11,6 @@ block content
                             i.bi.bi-archive.me-2
                             | Lista de Utilizadores
                     .card-body
-                        - var table_data = users
+                        - var table_data = users.filter(user => user.username !== username)
                         - var data_name = "accordions"
                         include ../components/users_table

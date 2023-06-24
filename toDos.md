@@ -30,7 +30,7 @@ Cris
 
 Joao
 
-# Criar logistica de admin e permite alterar permissoes de utilizadores
+# Criar logistica de admin e permite alterar permissoes de utilizadores (done)
 
 Joao
 

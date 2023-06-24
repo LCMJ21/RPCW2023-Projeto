@@ -18,6 +18,13 @@ block table
                     td #{elem.level}
                     td #{elem.dateCreated}
                     td.text-end
+                        form(method="POST" action="/users/changePermissions").d-flex.justify-content-between
+                            input(type="hidden" name="username" value=elem.username)
+                            select(name="level" id="level")
+                                option(value="Administrador") Administrador
+                                option(value="Consumidor") Consumidor
+                                option(value="Produtor") Produtor
+                            button.btn.btn-primary(type="submit") Update
 
 
 
