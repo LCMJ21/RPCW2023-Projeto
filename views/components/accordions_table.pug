@@ -22,10 +22,10 @@ block table
                     td #{elem.Tema}
                     td #{elem.Tribunal}
                     td.text-end
-                        +favorite_button(elem.id, user.favorites)
+                        +favorite_button(elem.Processo, user.favorites)
                         if user.level === "Administrador"
-                            +edit_button(elem.id)
-                            +delete_button(elem.id)
+                            +edit_button(elem.Processo)
+                            +delete_button(elem.Processo)
 
 
     block pagination

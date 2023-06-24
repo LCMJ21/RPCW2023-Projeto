@@ -55,7 +55,7 @@ router.post(
   }
 );
 
-router.get("/permissions", function (req, res, next) {
+router.get("/permissions", verificaAdminAcesso, function (req, res, next) {
   const username = getJwtPayload(req).username;
   user.getUsers().then((users) => {
     res.render("user/permissions", {
@@ -66,15 +66,17 @@ router.get("/permissions", function (req, res, next) {
   });
 });
 
-router.post("/changePermissions", function (req, res, next) {
-  const username = req.body.username;
-  const level = req.body.level;
-  console.log(username, level);
-  user.changePermissions(username, level).then((u) => {
-    console.log(u);
-    res.redirect("/users/permissions");
-  });
-});
+router.post(
+  "/changePermissions",
+  verificaAdminAcesso,
+  function (req, res, next) {
+    const username = req.body.username;
+    const level = req.body.level;
+    user.changePermissions(username, level).then((u) => {
+      res.redirect("/users/permissions");
+    });
+  }
+);
 
 router.post("/register", function (req, res, next) {
   var data = new Date().toISOString().substring(0, 16);
@@ -85,7 +87,7 @@ router.post("/register", function (req, res, next) {
       email: req.body.email,
       afiliation: req.body.afiliation,
       dateCreated: data,
-      level: Level.Admin,
+      level: Level.Consumer,
       lastAccess: data,
       favorites: [],
     }),
