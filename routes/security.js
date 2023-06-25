@@ -21,14 +21,42 @@ exports.verificaAdminAcesso = (req, res, next) => {
   var myToken = req.cookies["token"];
 
   if (myToken) {
-    const payload = jwt.decode(myToken)
-      if (!payload) {
-        res.clearCookie("token").redirect("/users/login");
-      } else if (payload.level === Level.Admin) {
-        next();
-      } else {
-        res.render("error", { message: "Acesso negado! Apenas Adminnistradores podem efetuar esta ação.", error: { status: "403", stack: "" } });
-      }
+    const payload = jwt.decode(myToken);
+    if (!payload) {
+      res.clearCookie("token").redirect("/users/login");
+    } else if (payload.level === Level.Admin) {
+      next();
+    } else {
+      res.render("error", {
+        message:
+          "Acesso negado! Apenas Adminnistradores podem efetuar esta ação.",
+        error: { status: "403", stack: "" },
+      });
+    }
+  } else {
+    res.redirect("/users/login");
+  }
+};
+
+exports.verificaAdminOrProducerAcesso = (req, res, next) => {
+  var myToken = req.cookies["token"];
+
+  if (myToken) {
+    const payload = jwt.decode(myToken);
+    if (!payload) {
+      res.clearCookie("token").redirect("/users/login");
+    } else if (
+      payload.level === Level.Admin ||
+      payload.level === Level.Producer
+    ) {
+      next();
+    } else {
+      res.render("error", {
+        message:
+          "Acesso negado! Apenas Adminnistradores podem efetuar esta ação.",
+        error: { status: "403", stack: "" },
+      });
+    }
   } else {
     res.redirect("/users/login");
   }

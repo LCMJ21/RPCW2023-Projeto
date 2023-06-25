@@ -9,6 +9,7 @@ module.exports.getUserInfo = (username) =>
     {
       afiliation: 1,
       dateCreated: 1,
+      username: 1,
       email: 1,
       favorites: 1,
       lastAccess: 1,

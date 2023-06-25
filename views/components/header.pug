@@ -9,18 +9,10 @@ block header
 
                 ul.nav.col-12.col-lg-auto.me-lg-auto.mb-2.justify-content-center.mb-md-0
                     li
-                        a.nav-link.px-2.text-secondary(href="#") Home
-                    li
-                        a.nav-link.px-2.text-white(href="#") Features
-                    li
-                        a.nav-link.px-2.text-white(href="#") Pricing
-                    li
-                        a.nav-link.px-2.text-white(href="#") FAQs
-                    li
-                        a.nav-link.px-2.text-white(href="#") About
-
-                    li
-                        a.nav-link.px-2.text-white(href="/users/permissions") Change Permissions
+                        a.nav-link.px-2.text-secondary(href="/") Home
+                    if user && user.level === 'Administrador'
+                        li
+                            a.nav-link.px-2.text-white(href="/users/permissions") Change Permissions
 
                 div.d-flex.align-items-center.text-end
                     form(method="POST" action="/users/logout" ) 

@@ -18,7 +18,7 @@ block content
                                     i.bi.bi-file-earmark-zip.me-2
                                     .me-auto Acordão #{accordion.Processo}
                                     +favorite_button(accordion.Processo, user.favorites)
-                                    if user.isAdmin
+                                    if user.level === 'Administrador'
                                         +edit_button(accordion.Processo)
                                         +delete_button(accordion.Processo)
                             .card-body

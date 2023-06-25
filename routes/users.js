@@ -2,8 +2,13 @@ var express = require("express");
 var router = express.Router();
 var jwt = require("jsonwebtoken");
 var userModel = require("../models/user");
-var user = require("../controllers/user");
 var passport = require("passport");
+const {
+  getUserInfo,
+  getUsers,
+  changePermissions,
+} = require("../controllers/user");
+
 const {
   verificaAcesso,
   getJwtPayload,
@@ -29,7 +34,7 @@ router.get("/register", function (req, res, next) {
 
 /* GET users listing. */
 router.get("/user", verificaAcesso, async (req, res, next) => {
-  const u = await user.getUserInfo(getJwtPayload(req).username);
+  const u = await getUserInfo(getJwtPayload(req).username);
 
   res.render("user/user", { title: "Justice user", user: u });
 });
@@ -55,16 +60,24 @@ router.post(
   }
 );
 
-router.get("/permissions", verificaAdminAcesso, function (req, res, next) {
-  const username = getJwtPayload(req).username;
-  user.getUsers().then((users) => {
-    res.render("user/permissions", {
-      title: "Justice permissions",
-      users,
-      username,
-    });
-  });
-});
+router.get(
+  "/permissions",
+  verificaAdminAcesso,
+  async function (req, res, next) {
+    try {
+      const user = await getUserInfo(getJwtPayload(req).username);
+      console.log("user--------", user);
+      const users = await getUsers();
+      res.render("user/permissions", {
+        title: "Justice permissions",
+        users,
+        user,
+      });
+    } catch (err) {
+      res.render("error", { error: err });
+    }
+  }
+);
 
 router.post(
   "/changePermissions",
@@ -72,7 +85,7 @@ router.post(
   function (req, res, next) {
     const username = req.body.username;
     const level = req.body.level;
-    user.changePermissions(username, level).then((u) => {
+    changePermissions(username, level).then((u) => {
       res.redirect("/users/permissions");
     });
   }
