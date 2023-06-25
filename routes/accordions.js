@@ -28,7 +28,7 @@ router.get("/", verificaAcesso, async function (req, res, next) {
     const page = Number(req.query.page || "1");
     const perPage = 20;
     const accordions_list = await accordions.list(page, perPage);
-    res.render("homepage", {
+    res.cookie("previousUrl", "/").render("homepage", {
       title: "Justice home",
       accordions: accordions_list,
       user,
@@ -86,11 +86,13 @@ router.get(
           .render("error", { error: "Accordion" + processo + "not found" });
         return;
       }
-      res.render("accordion", {
-        title: "Accordion " + accordion.processo + " details",
-        accordion: accordion,
-        user,
-      });
+      res
+        .cookie("previousUrl", "/accordion/" + req.params.processo)
+        .render("accordion", {
+          title: "Accordion " + accordion.processo + " details",
+          accordion: accordion,
+          user,
+        });
     } catch (err) {
       res.render("error", { error: err });
     }
@@ -120,7 +122,7 @@ router.get(
 
     try {
       await removeFavorite(username, req.params.id);
-      res.redirect("/");
+      res.redirect(req.cookies.previousUrl || "/");
     } catch (err) {
       res.render("error", { error: err });
     }
@@ -132,10 +134,9 @@ router.get(
   verificaAcesso,
   async function (req, res, next) {
     const username = getJwtPayload(req).username;
-
     try {
       await addFavorite(username, req.params.id);
-      res.redirect("/");
+      res.redirect(req.cookies.previousUrl || "/");
     } catch (err) {
       res.render("error", { error: err });
     }
