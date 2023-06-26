@@ -1,7 +1,13 @@
-module.exports.paginatedResults = async (model, page, perPage) => {
+module.exports.paginatedResults = async (model, page, perPage, filter=undefined) => {
     const startIndex = (page - 1) * perPage;
     const endIndex = page * perPage;
-    const totalElems = await model.countDocuments().exec();
+    var totalElems;
+    if (filter) {
+      totalElems = await model.countDocuments(filter).exec();
+    }
+    else {
+      totalElems = await model.countDocuments().exec();
+    }
     const totalPages = Math.ceil(totalElems / perPage);
 
     const results = {};
@@ -33,8 +39,14 @@ module.exports.paginatedResults = async (model, page, perPage) => {
 
 
     try {
-      results.results = await model.find().limit(perPage).skip(startIndex).exec();
-      return results;
+      if (filter) {
+        results.results = await model.find(filter).limit(perPage).skip(startIndex).exec();
+        return results;
+      }
+      else {
+        results.results = await model.find().limit(perPage).skip(startIndex).exec();
+        return results;
+      }
     } catch (e) {
       return { message: e.message };
     }

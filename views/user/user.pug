@@ -3,15 +3,16 @@ extends ../components/base
 block content 
     .container.main-page
         .row
-            //- .col-8
-            //-     .card
-            //-         .card-header
-            //-             h4.mb-0
-            //-                 i.bi.bi-archive.me-2
-            //-                 | Favorites
-            //-         .card-body
-            //-             - var table_data = user.favorites
-            //-             include ../components/archives_table
+            .col-8
+                .card
+                    .card-header
+                        h4.mb-0
+                            i.bi.bi-archive.me-2
+                            | Favorites
+                    .card-body
+                        - var table_data = userAccordions
+                        - var data_name = "Acordãos Favoritos"
+                        include ../components/accordions_table
             .col-4
 
                 .card.mb-4

@@ -23,8 +23,9 @@ block table
                     td #{elem.Tribunal}
                     td.text-end
                         +favorite_button(elem.Processo, user.favorites)
-                        if user.level === "Administrador"
+                        if user.level === "Administrador" || user.level === 'Produtor'
                             +edit_button(elem.Processo)
+                        if user.level === 'Administrador'
                             +delete_button(elem.Processo)
 
 

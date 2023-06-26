@@ -2,14 +2,9 @@ var express = require("express");
 var router = express.Router();
 var jwt = require("jsonwebtoken");
 var userModel = require("../models/user");
-var user = require("../controllers/user");
+var userController = require("../controllers/user");
+var accordion = require("../controllers/accordion");
 var passport = require("passport");
-const {
-  getUserInfo,
-  getUsers,
-  changePermissions,
-} = require("../controllers/user");
-
 const {
   verificaAcesso,
   getJwtPayload,
@@ -35,9 +30,13 @@ router.get("/register", function (req, res, next) {
 
 /* GET users listing. */
 router.get("/user", verificaAcesso, async (req, res, next) => {
-  const u = await getUserInfo(getJwtPayload(req).username);
+  const u = await userController.getUserInfo(getJwtPayload(req).username);
+  const page = Number(req.query.page || "1");
+  const perPage = 20;
+  const userAccordions = await accordion.getUserAccordions(page, perPage, u.favorites);
+  console.log("userAccordions", userAccordions);
 
-  res.render("user/user", { title: "Justice user", user: u });
+  res.render("user/user", { title: "Justice user", user: u, userAccordions: userAccordions });
 });
 
 router.post(
@@ -66,9 +65,9 @@ router.get(
   verificaAdminAcesso,
   async function (req, res, next) {
     try {
-      const user = await getUserInfo(getJwtPayload(req).username);
+      const user = await userController.getUserInfo(getJwtPayload(req).username);
       console.log("user--------", user);
-      const users = await getUsers();
+      const users = await userController.getUsers();
       res.render("user/permissions", {
         title: "Justice permissions",
         users,
@@ -86,7 +85,7 @@ router.post(
   function (req, res, next) {
     const username = req.body.username;
     const level = req.body.level;
-    changePermissions(username, level).then((u) => {
+    userController.changePermissions(username, level).then((u) => {
       res.redirect("/users/permissions");
     });
   }

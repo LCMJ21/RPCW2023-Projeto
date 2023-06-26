@@ -5,6 +5,10 @@ module.exports.list = (page, perPage) => {
   return pagination.paginatedResults(accordion, page, perPage);
 };
 
+module.exports.getUserAccordions = (page, perPage, accordions_ids) => {
+  return pagination.paginatedResults(accordion, page, perPage, { Processo: { $in: accordions_ids } });
+};
+
 module.exports.getAccordion = (processo) => {
   return accordion.findOne({ Processo: processo })
     .then((result) => result)
