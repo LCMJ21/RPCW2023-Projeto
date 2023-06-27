@@ -38,9 +38,8 @@ router.get("/user", verificaAcesso, async (req, res, next) => {
     perPage,
     u.favorites
   );
-  console.log("userAccordions", userAccordions);
 
-  res.render("user/user", {
+  res.cookie("previousUrl", "/users/user/?page=" + page).render("user/user", {
     title: "Justice user",
     user: u,
     userAccordions: userAccordions,

@@ -28,7 +28,7 @@ router.get("/", verificaAcesso, async function (req, res, next) {
     const page = Number(req.query.page || "1");
     const perPage = 20;
     const accordions_list = await accordions.list(page, perPage);
-    res.cookie("previousUrl", "/").render("homepage", {
+    res.cookie("previousUrl", "/?page=" + page).render("homepage", {
       title: "Justice home",
       accordions: accordions_list,
       user,
