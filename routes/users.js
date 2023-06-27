@@ -33,8 +33,17 @@ router.get("/user", verificaAcesso, async (req, res, next) => {
   const u = await userController.getUserInfo(getJwtPayload(req).username);
   const page = Number(req.query.page || "1");
   const perPage = 20;
-  const userAccordions = await accordion.getUserAccordions(page, perPage, u.favorites);
-  res.render("user/user", { title: "Justice user", user: u, userAccordions: userAccordions });
+  const userAccordions = await accordion.getUserAccordions(
+    page,
+    perPage,
+    u.favorites
+  );
+
+  res.cookie("previousUrl", "/users/user/?page=" + page).render("user/user", {
+    title: "Justice user",
+    user: u,
+    userAccordions: userAccordions,
+  });
 });
 
 router.post(
