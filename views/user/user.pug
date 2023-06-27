@@ -8,7 +8,7 @@ block content
                     .card-header
                         h4.mb-0
                             i.bi.bi-archive.me-2
-                            | Favorites
+                            | Favoritos
                     .card-body
                         - var table_data = userAccordions
                         - var data_name = "Acordãos Favoritos"
@@ -19,30 +19,30 @@ block content
                     .card-header
                         h4.mb-0
                             i.bi.bi-person.me-2
-                            | Basic Info
+                            | Informação Basica
                     .card-body
                         h6.fw-normal
-                            p.fw-bold.d-inline Name: 
+                            p.fw-bold.d-inline Nome: 
                             p.d-inline #{user.name}
                         h6.fw-normal
                             p.fw-bold.d-inline Email: 
                             p.d-inline #{user.email}
                         h6.fw-normal
-                            p.fw-bold.d-inline Afiliation: 
+                            p.fw-bold.d-inline Afiliação: 
                             p.d-inline #{user.afiliation}
 
                 .card.mb-4
                     .card-header
                         h4.mb-0
                             i.bi.bi-info-circle.me-2
-                            | Other Info
+                            | Outra Informação
                     .card-body
                         h6.fw-normal
-                            p.fw-bold.d-inline Access: 
+                            p.fw-bold.d-inline Acesso: 
                             p.d-inline #{user.level}
                         h6.fw-normal
-                            p.fw-bold.d-inline Register Date: 
+                            p.fw-bold.d-inline Data de Registo: 
                             p.d-inline #{user.dateCreated}
                         h6.fw-normal
-                            p.fw-bold.d-inline Last Login Date: 
+                            p.fw-bold.d-inline Data de ultimo login: 
                             p.d-inline #{user.lastAccess}
