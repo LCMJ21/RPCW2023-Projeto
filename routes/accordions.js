@@ -54,7 +54,6 @@ router.post(
           user,
         });
       } else {
-        console.log(req.acordao);
         res.redirect("/accordion/new");
       }
     } catch (err) {
