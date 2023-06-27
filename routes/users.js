@@ -33,10 +33,18 @@ router.get("/user", verificaAcesso, async (req, res, next) => {
   const u = await userController.getUserInfo(getJwtPayload(req).username);
   const page = Number(req.query.page || "1");
   const perPage = 20;
-  const userAccordions = await accordion.getUserAccordions(page, perPage, u.favorites);
+  const userAccordions = await accordion.getUserAccordions(
+    page,
+    perPage,
+    u.favorites
+  );
   console.log("userAccordions", userAccordions);
 
-  res.render("user/user", { title: "Justice user", user: u, userAccordions: userAccordions });
+  res.render("user/user", {
+    title: "Justice user",
+    user: u,
+    userAccordions: userAccordions,
+  });
 });
 
 router.post(
@@ -52,7 +60,6 @@ router.post(
         if (e)
           res.status(500).jsonp({ error: "Erro na geração do token: " + e });
         else {
-          user;
           res.cookie("token", token).redirect("/");
         }
       }
@@ -65,7 +72,9 @@ router.get(
   verificaAdminAcesso,
   async function (req, res, next) {
     try {
-      const user = await userController.getUserInfo(getJwtPayload(req).username);
+      const user = await userController.getUserInfo(
+        getJwtPayload(req).username
+      );
       console.log("user--------", user);
       const users = await userController.getUsers();
       res.render("user/permissions", {
