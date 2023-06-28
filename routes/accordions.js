@@ -110,6 +110,7 @@ router.get(
       const user = await getUserInfo(getJwtPayload(req).username);
       const processo = req.params.processo;
       const accordion = await accordions.getAccordion(processo);
+      console.log(accordion);
       if (!accordion) {
         res
           .status(404)
@@ -122,7 +123,7 @@ router.get(
           title: "Accordion " + accordion.Processo,
           fieldsDict: fieldsDict,
           accordion: accordion,
-          user,
+          user: user,
         });
     } catch (err) {
       res.render("error", { error: err });

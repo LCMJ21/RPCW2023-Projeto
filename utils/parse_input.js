@@ -12,7 +12,7 @@ module.exports.parse_new_acordao_input = (req, res, next) => {
         if (new_key in acordao) {
           req.error = true;
           req.error_msg =
-            "O atributo " + new_key + " está defeinido mais do que uma vez!";
+            "O atributo " + new_key + " está definido mais do que uma vez!";
           next();
           return;
         }

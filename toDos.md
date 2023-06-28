@@ -43,3 +43,18 @@ Joao
 Joao
 
 https://docs.google.com/presentation/d/1pTDT-6-o7x216G2ADKUyiLRXtPrPoUs7VqaRjqNnMPU/edit
+
+
+-------------------------------------------------------------------------------------------
+Perceber maneira efeciente querys Cris
+Descritores tabela diferente Cris
+Eliminar *,. e vazio Cris
+
+keys unique and not null
+
+Ver maneira de esconder e extender descritores e ordenar alfabeto 
+
+Otimizar busca favorito
+
+Editar utilizador (extra)
+

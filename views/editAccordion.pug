@@ -7,12 +7,12 @@ block content
             .col-12
                 include components/breadcrumb
                     li.breadcrumb-item(aria-current="page")
-                        a(href="/") Lista de Acordões
+                        a(href="/") Lista de Acordãos
                     li.breadcrumb-item(aria-current="page")
                         a(href="/accordion/" + processo) Acordão #{processo} 
                     li.breadcrumb-item.active(aria-current="page") Editar Acordão #{processo}
                 if error
-                    .alert.alert-warning(role="alert")
+                    .alert.alert-danger(role="alert")
                         | #{error}
                 form(action="" method="post")
                     .d-flex.mb-2
@@ -20,7 +20,7 @@ block content
                             if error_acordao && error_acordao.labels
                                 +input_labels([], error_acordao.labels)
                             else
-                                +input_labels([], [])
+                                +input_labels(["A","B","C"], [])
                         button.btn.btn-outline-success Alterar Acordão
                     .row
                         .col-8 

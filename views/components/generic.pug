@@ -6,9 +6,10 @@ mixin card_entry(key, value)
 
 mixin make_labels(labels)
     if labels
-        .mb-2
-            for label in labels
-                span.badge.bg-primary.me-1= label
+        - var sorted_labels = labels.sort()
+            .mb-2
+                for label in sorted_labels
+                    span.badge.bg-primary.me-1= label
 
 mixin add_acordao_elements_errors(old_elements, section, options)
     - var new_key_key, new_key_value

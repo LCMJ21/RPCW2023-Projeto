@@ -49,10 +49,10 @@ const fieldsDict = {
         'Referência a Doutrina',
     ],
     'geral': [
+        'Processo',
         'Nº Convencional',
         'Nº Processo/TAF',
         'Nº do Documento',
-        'Processo',
         'Área Temática',
     ],
     'entidades': [

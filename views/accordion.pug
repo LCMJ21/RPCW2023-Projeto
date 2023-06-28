@@ -7,69 +7,62 @@ block content
             .col-12
                 include components/breadcrumb
                     li.breadcrumb-item(aria-current="page")
-                        a(href="/") Lista de Acordões 
+                        a(href="/") Lista de Acordãos
                     li.breadcrumb-item.active(aria-current="page") Acordão #{accordion.Processo}
                 +make_labels(accordion["Descritores"])
-                .row
-                    .col-8 
-                        .card
-                            .card-header
-                                h4.mb-0.d-flex.align-items-center
-                                    i.bi.bi-file-earmark-zip.me-2
-                                    .me-auto Acordão #{accordion.Processo}
-                                    +favorite_button(accordion.Processo, user.favorites)
-                                    if user.level === "Administrador" || user.level === 'Produtor'
-                                        +edit_button(elem.Processo)
-                                    if user.level === 'Administrador'
-                                        +delete_button(elem.Processo)
-                            .card-body
-                                each key in fieldsDict.main
-                                    +card_entry(key, accordion[key])
-                        if accordion["Mais Informação"]
-                            .card.mt-3
-                                .card-header
-                                    h4.mb-0.d-flex.align-items-center
-                                        i.bi.bi-exclamation-lg.me-2
-                                        .me-auto Mais Informação
-                                .card-body
-                                    p=accordion["Mais Informação"]
-                    .col-4
-                        .card.mb-3
-                            .card-header
-                                h4.mb-0
-                                    i.bi.bi-globe.me-2
-                                    | Informação Geral
-                            .card-body
-                                each key in fieldsDict.geral
-                                    +card_entry(key, accordion[key])
-                        .card.mb-3
-                            .card-header
-                                h4.mb-0
-                                    i.bi.bi-person-circle.me-2
-                                    | Entidades Associadas
-                            .card-body
-                                each key in fieldsDict.entidades
-                                    +card_entry(key, accordion[key])
-                        .card.mb-3
-                            .card-header
-                                h4.mb-0
-                                    i.bi.bi-calendar4-week.me-2
-                                    |  Datas Importantes
-                            .card-body
-                                each key in fieldsDict.datas
-                                    +card_entry(key, accordion[key])
-                        .card.mb-3
-                            .card-header
-                                h4.mb-0
-                                    i.bi.bi-info-circle.me-2
-                                    |  Outras Informações
-                            .card-body
-                                each key in fieldsDict.outros
-                                    +card_entry(key, accordion[key])
-
-
-
-
-
-
-
+        .row
+            .col-8 
+                .card
+                    .card-header
+                        h4.mb-0.d-flex.align-items-center
+                            i.bi.bi-file-earmark-zip.me-2
+                            .me-auto Acordão #{accordion.Processo}
+                            +favorite_button(accordion.Processo, user.favorites)
+                            if user.level === "Administrador" || user.level === 'Produtor'
+                                +edit_button(accordion.Processo)
+                            if user.level === 'Administrador'
+                                +delete_button(accordion.Processo)
+                    .card-body
+                        each key in fieldsDict.main
+                            +card_entry(key, accordion[key])
+                if accordion["Mais Informação"]
+                    .card.mt-3
+                        .card-header
+                            h4.mb-0.d-flex.align-items-center
+                                i.bi.bi-exclamation-lg.me-2
+                                .me-auto Mais Informação
+                        .card-body
+                            p=accordion["Mais Informação"]
+            .col-4
+                .card.mb-3
+                    .card-header
+                        h4.mb-0
+                            i.bi.bi-globe.me-2
+                            | Informação Geral
+                    .card-body
+                        each key in fieldsDict.geral
+                            +card_entry(key, accordion[key])
+                .card.mb-3
+                    .card-header
+                        h4.mb-0
+                            i.bi.bi-person-circle.me-2
+                            | Entidades Associadas
+                    .card-body
+                        each key in fieldsDict.entidades
+                            +card_entry(key, accordion[key])
+                .card.mb-3
+                    .card-header
+                        h4.mb-0
+                            i.bi.bi-calendar4-week.me-2
+                            |  Datas Importantes
+                    .card-body
+                        each key in fieldsDict.datas
+                            +card_entry(key, accordion[key])
+                .card.mb-3
+                    .card-header
+                        h4.mb-0
+                            i.bi.bi-info-circle.me-2
+                            |  Outras Informações
+                    .card-body
+                        each key in fieldsDict.outros
+                            +card_entry(key, accordion[key])

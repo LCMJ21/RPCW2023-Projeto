@@ -5,7 +5,6 @@ module.exports.paginatedResults = async (model, page, perPage, filter=undefined)
     if (filter) {
       console.log("Counting elements");
       totalElems = await model.count(filter).exec();
-
     }
     else {
       totalElems = await model.estimatedDocumentCount().exec();
