@@ -3,7 +3,11 @@ extends ../components/base
 block content 
     .container.main-page
         .row
-            .col-8
+            .col-12
+                include ../components/breadcrumb
+                    li.breadcrumb-item.active(aria-current="page") Página do Utilizador
+        .row
+            .col-9
                 .card
                     .card-header
                         h4.mb-0
@@ -13,7 +17,7 @@ block content
                         - var table_data = userAccordions
                         - var data_name = "Acordãos Favoritos"
                         include ../components/accordions_table
-            .col-4
+            .col-3
 
                 .card.mb-4
                     .card-header

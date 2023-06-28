@@ -27,9 +27,10 @@ module.exports.parse_new_acordao_input = (req, res, next) => {
       }
     }
   }
-  needed_keys = ["A"];
 
-  for (const key of needed_keys) {
+  needed_keys = ["A"];
+  
+  for (var key of needed_keys) {
     if (!(key in acordao)) {
       req.error = true;
       req.error_msg = "O atributo " + key + " é obrigatório!";

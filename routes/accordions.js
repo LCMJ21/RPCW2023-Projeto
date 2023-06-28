@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+const fieldsDict = require("../models/acordao").fieldsDict;
 var accordions = require("../controllers/accordion");
 const { parse_new_acordao_input } = require("../utils/parse_input");
 const {
@@ -13,15 +14,6 @@ const {
   getUserInfo,
 } = require("../controllers/user");
 
-const input_group = {
-  main: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
-  geral: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
-  entidades: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
-  datas: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
-  outros: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
-  labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
-};
-
 router.get("/", verificaAcesso, async function (req, res, next) {
   try {
     const user = await getUserInfo(getJwtPayload(req).username);
@@ -29,7 +21,7 @@ router.get("/", verificaAcesso, async function (req, res, next) {
     const perPage = 20;
     const accordions_list = await accordions.list(page, perPage);
     res.cookie("previousUrl", "/?page=" + page).render("homepage", {
-      title: "Justice home",
+      title: "Justice homepage",
       accordions: accordions_list,
       user,
     });
@@ -47,8 +39,8 @@ router.post(
       if (req.error) {
         const user = await getUserInfo(getJwtPayload(req).username);
         res.render("newAccordion", {
-          title: "Add new accordion",
-          input_group,
+          title: "Novo Acordão",
+          fieldsDict: fieldsDict,
           error_acordao: req.body,
           error: req.error_msg,
           user,
@@ -65,8 +57,47 @@ router.post(
 router.get("/accordion/new", verificaAcesso, async function (req, res, next) {
   const user = await getUserInfo(getJwtPayload(req).username);
   res.render("newAccordion", {
-    title: "Add new accordion",
-    input_group,
+    title: "Novo Acordão",
+    fieldsDict: fieldsDict,
+    user,
+  });
+});
+
+router.post(
+  "/accordion/edit/:processo",
+  verificaAcesso,
+  parse_new_acordao_input,
+  async function (req, res, next) {
+    try {
+      const processo = req.params.processo;
+      if (req.error) {
+        const user = await getUserInfo(getJwtPayload(req).username);
+        res.render("editAccordion", {
+          title: "Editar Acordão" + processo,
+          fieldsDict: fieldsDict,
+          processo: processo,
+          error_acordao: req.body,
+          error: req.error_msg,
+          user,
+        });
+      } else {
+        res.redirect("/accordion/edit/" + processo);
+      }
+    } catch (err) {
+      res.render("error", { error: err });
+    }
+  }
+);
+
+router.get("/accordion/edit/:processo", verificaAcesso, async function (req, res, next) {
+  const user = await getUserInfo(getJwtPayload(req).username);
+  const processo = req.params.processo;
+  const accordion = await accordions.getAccordion(processo);
+  res.render("editAccordion", {
+    title: "Editar Acordão " + processo,
+    processo: processo,
+    fieldsDict: fieldsDict,
+    oldAccordion: accordion,
     user,
   });
 });
@@ -88,7 +119,8 @@ router.get(
       res
         .cookie("previousUrl", "/accordion/" + req.params.processo)
         .render("accordion", {
-          title: "Accordion " + accordion.processo + " details",
+          title: "Accordion " + accordion.Processo,
+          fieldsDict: fieldsDict,
           accordion: accordion,
           user,
         });

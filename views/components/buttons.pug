@@ -12,7 +12,7 @@ mixin favorite_button(id, favorites)
             i.bi.bi-star
 
 mixin edit_button(id)
-    a.btn.text-warning.remove-border(href="#")
+    a.btn.text-warning.remove-border(href="/accordion/edit/" + id)
         i.bi.bi-pencil-fill
 
 mixin delete_button(id)

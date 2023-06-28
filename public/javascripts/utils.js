@@ -12,7 +12,7 @@ function addElement(list_str, button_id) {
     var option = document.createElement("option");
     option.selected = "";
     option.value = "";
-    option.innerHTML = "Choose...";
+    option.innerHTML = "Atributo...";
     select.appendChild(option);
     for (var elem of list_str) {
         var option = document.createElement("option");
@@ -25,8 +25,7 @@ function addElement(list_str, button_id) {
     input.name=button_id+cc+".value"
     input.className = "form-control";
     input.type = "text";
-    input.placeholder = "Recipient's username";
-    input.ariaLabel = "Recipient's username";
+    input.placeholder = "Valor"
     input.ariaDescribedBy = "button-addon2";
     newElement.appendChild(input);
     var button = document.createElement("button");

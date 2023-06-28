@@ -18,13 +18,21 @@ block content
                                     i.bi.bi-file-earmark-zip.me-2
                                     .me-auto Acordão #{accordion.Processo}
                                     +favorite_button(accordion.Processo, user.favorites)
+                                    if user.level === "Administrador" || user.level === 'Produtor'
+                                        +edit_button(elem.Processo)
                                     if user.level === 'Administrador'
-                                        +edit_button(accordion.Processo)
-                                        +delete_button(accordion.Processo)
+                                        +delete_button(elem.Processo)
                             .card-body
-                                +card_entry("Sumário", accordion["Sumário"])
-                                +card_entry("Texto Integral", accordion["Texto Integral"])
-                                +card_entry("Desisão", accordion["Decisão"])
+                                each key in fieldsDict.main
+                                    +card_entry(key, accordion[key])
+                        if accordion["Mais Informação"]
+                            .card.mt-3
+                                .card-header
+                                    h4.mb-0.d-flex.align-items-center
+                                        i.bi.bi-exclamation-lg.me-2
+                                        .me-auto Mais Informação
+                                .card-body
+                                    p=accordion["Mais Informação"]
                     .col-4
                         .card.mb-3
                             .card-header
@@ -32,38 +40,32 @@ block content
                                     i.bi.bi-globe.me-2
                                     | Informação Geral
                             .card-body
-                                +card_entry("Acordão", accordion["Acordão"])
-                                +card_entry("Nº Convencional", accordion["Nº Convencional"])
-                                +card_entry("Processo", accordion["Processo"])
-                                +card_entry("Nº do Documento", accordion["Nº do Documento"])
-                                +card_entry("Data", accordion["Data"])
+                                each key in fieldsDict.geral
+                                    +card_entry(key, accordion[key])
                         .card.mb-3
                             .card-header
                                 h4.mb-0
                                     i.bi.bi-person-circle.me-2
                                     | Entidades Associadas
                             .card-body
-                                +card_entry("Autor", accordion["Autor"])
-                                +card_entry("Requerente", accordion["Requerente"])
-                                +card_entry("Requerido", accordion["Requerido"])
-                                +card_entry("Tribunal de origem", accordion["tribunal"])
+                                each key in fieldsDict.entidades
+                                    +card_entry(key, accordion[key])
                         .card.mb-3
                             .card-header
                                 h4.mb-0
                                     i.bi.bi-calendar4-week.me-2
                                     |  Datas Importantes
                             .card-body
-                                +card_entry("Data do Acordão", accordion["Data do Acordão"])
+                                each key in fieldsDict.datas
+                                    +card_entry(key, accordion[key])
                         .card.mb-3
                             .card-header
                                 h4.mb-0
                                     i.bi.bi-info-circle.me-2
                                     |  Outras Informações
                             .card-body
-                                +card_entry("Votação", accordion["Votação"])
-                                +card_entry("Privacidade", accordion["Privacidade"])
-                                +card_entry("Tema", accordion["Tema"])
-                                +card_entry("Especie", accordion["Especie"])
+                                each key in fieldsDict.outros
+                                    +card_entry(key, accordion[key])
 
 
 

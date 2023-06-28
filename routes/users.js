@@ -30,18 +30,20 @@ router.get("/register", function (req, res, next) {
 
 /* GET users listing. */
 router.get("/user", verificaAcesso, async (req, res, next) => {
-  const u = await userController.getUserInfo(getJwtPayload(req).username);
+  const user = await userController.getUserInfo(getJwtPayload(req).username);
   const page = Number(req.query.page || "1");
   const perPage = 20;
   const userAccordions = await accordion.getUserAccordions(
     page,
     perPage,
-    u.favorites
+    user.favorites
   );
+
+  console.log(user)
 
   res.cookie("previousUrl", "/users/user/?page=" + page).render("user/user", {
     title: "Justice user",
-    user: u,
+    user: user,
     userAccordions: userAccordions,
   });
 });

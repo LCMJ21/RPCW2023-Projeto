@@ -8,7 +8,7 @@ const accordionSchema = new mongoose.Schema({
     'Data do Acordão': String,
     Decisão: String,
     'Decisão Texto Integral': String,
-    Descritores: String,
+    Descritores: Array,
     'Indicações Eventuais': String,
     'Jurisprudência Nacional': String,
     'Legislação Nacional': String,
@@ -36,5 +36,49 @@ const accordionSchema = new mongoose.Schema({
     'Mais Informação': String,
 });
 
+const fieldsDict = {
+    'main': [
+        'Decisão',
+        'Decisão Texto Integral',
+        'Indicações Eventuais',
+        'Jurisprudência Nacional',
+        'Legislação Nacional',
+        'Sumário',
+        'Texto Integral',
+        'Votação',
+        'Referência a Doutrina',
+    ],
+    'geral': [
+        'Nº Convencional',
+        'Nº Processo/TAF',
+        'Nº do Documento',
+        'Processo',
+        'Área Temática',
+    ],
+    'entidades': [
+        'Contencioso',
+        'Recorrente',
+        'Recorrido',
+        'Relator',
+        'Magistrado',
+        'Tribunal',
+        'Tribunal Recurso',
+        'Secção',
+    ],
+    'datas': [
+        'Ano da Publicação',
+        'Data',
+        'Data de Entrada',
+        'Data do Acordão'
+    ],
+    'outros': [
+        'Meio Processual',
+        'Privacidade',
+        'Objecto',
+        'tribunal',
+    ],
+};
+
 const myDB = mongoose.connection.useDb('JusticeDB');
 module.exports = myDB.model('accordion', accordionSchema);
+module.exports.fieldsDict = fieldsDict;

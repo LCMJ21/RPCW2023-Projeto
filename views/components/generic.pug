@@ -12,7 +12,6 @@ mixin make_labels(labels)
 
 mixin add_acordao_elements_errors(old_elements, section, options)
     - var new_key_key, new_key_value
-    #{section}
     for value, key in old_elements
         - var is_section = key.includes(section)
         if is_section
@@ -31,6 +30,23 @@ mixin add_acordao_elements_errors(old_elements, section, options)
                     input.form-control(name=new_value_key value=value)
                     button.btn.btn-outline-danger(type="button" onclick="removeElementById('"+new_key_key+"')") 
                         i.bi.bi-dash-lg
+
+mixin add_acordao_elements_old(oldAccordian, key_addon, options)
+    - var new_key_key, new_value_key
+    for value, key in oldAccordian
+        - new_key_key = key + key_addon + ".key"
+        - new_value_key = key + key_addon + ".value"
+        - var is_section = options.includes(key) && value
+        if is_section
+            .input-group.mb-3(id=new_key_key)
+                select.form-select(name=new_key_key)
+                    option(value=key selected)= key
+                    for option in options
+                        if option != key
+                            option(value=option)= option
+                input.form-control(name=new_value_key value=value)
+                button.btn.btn-outline-danger(type="button" onclick="removeElementById('"+new_key_key+"')") 
+                    i.bi.bi-dash-lg
 
 mixin make_input_groups(list, add_button_id)
     .d-grid(id=add_button_id)

@@ -7,8 +7,10 @@ block content
             .col-12
                 include components/breadcrumb
                     li.breadcrumb-item(aria-current="page")
-                        a(href="/") Lista de Acordões 
-                    li.breadcrumb-item.active(aria-current="page") Acordão Novo
+                        a(href="/") Lista de Acordões
+                    li.breadcrumb-item(aria-current="page")
+                        a(href="/accordion/" + processo) Acordão #{processo} 
+                    li.breadcrumb-item.active(aria-current="page") Editar Acordão #{processo}
                 if error
                     .alert.alert-warning(role="alert")
                         | #{error}
@@ -19,7 +21,7 @@ block content
                                 +input_labels([], error_acordao.labels)
                             else
                                 +input_labels([], [])
-                        button.btn.btn-outline-success Adicionar Acordão
+                        button.btn.btn-outline-success Alterar Acordão
                     .row
                         .col-8 
                             .card
@@ -31,6 +33,8 @@ block content
                                     - const list_str_main = JSON.stringify(fieldsDict.main)
                                     if error_acordao
                                         +add_acordao_elements_errors(error_acordao, "addButtonMainInfo",fieldsDict.main)
+                                    else
+                                        +add_acordao_elements_old(oldAccordion, "addButtonMainInfo", fieldsDict.main)
                                     +make_input_groups(list_str_main, "addButtonMainInfo")
                         .col-4
                             .card.mb-3
@@ -42,6 +46,8 @@ block content
                                     - const list_str_geral = JSON.stringify(fieldsDict.geral)
                                     if error_acordao
                                         +add_acordao_elements_errors(error_acordao, "addButtonGeralInfo",fieldsDict.geral)
+                                    else
+                                        +add_acordao_elements_old(oldAccordion, "addButtonGeralInfo", fieldsDict.geral)
                                     +make_input_groups(list_str_geral, "addButtonGeralInfo")
                             .card.mb-3
                                 .card-header
@@ -52,6 +58,8 @@ block content
                                     - const list_str_entidades = JSON.stringify(fieldsDict.entidades)
                                     if error_acordao
                                         +add_acordao_elements_errors(error_acordao, "addButtonEntInfo",fieldsDict.entidades)
+                                    else
+                                        +add_acordao_elements_old(oldAccordion, "addButtonEntInfo", fieldsDict.entidades)
                                     +make_input_groups(list_str_entidades, "addButtonEntInfo")
                             .card.mb-3
                                 .card-header
@@ -62,6 +70,8 @@ block content
                                     - const list_str_datas = JSON.stringify(fieldsDict.datas)
                                     if error_acordao
                                         +add_acordao_elements_errors(error_acordao, "addButtonDataInfo",fieldsDict.datas)
+                                    else
+                                        +add_acordao_elements_old(oldAccordion, "addButtonDataInfo", fieldsDict.datas)
                                     +make_input_groups(list_str_datas, "addButtonDataInfo")
                             .card.mb-3
                                 .card-header
@@ -72,5 +82,6 @@ block content
                                     - const list_str_outros = JSON.stringify(fieldsDict.outros)
                                     if error_acordao
                                         +add_acordao_elements_errors(error_acordao, "addButtoOutrosInfo",fieldsDict.outros)
+                                    else
+                                        +add_acordao_elements_old(oldAccordion, "addButtoOutrosInfo", fieldsDict.outros)
                                     +make_input_groups(list_str_outros, "addButtoOutrosInfo")
-
