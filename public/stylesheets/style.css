@@ -37,3 +37,11 @@ a {
 .remove-border {
     border: none !important;
 }
+
+.rm-collapsing {
+    transition: none !important;
+  }
+
+.allow-line-break {
+    white-space: pre-wrap !important;
+}

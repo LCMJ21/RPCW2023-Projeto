@@ -19,7 +19,7 @@ block content
                                 +input_labels([], error_acordao.labels)
                             else
                                 +input_labels([], [])
-                        button.btn.btn-outline-success Adicionar Acordão
+                        button.btn.btn-outline-success.text-nowrap Adicionar Acordão
                     .row
                         .col-8 
                             .card
@@ -32,6 +32,17 @@ block content
                                     if error_acordao
                                         +add_acordao_elements_errors(error_acordao, "addButtonMainInfo",fieldsDict.main)
                                     +make_input_groups(list_str_main, "addButtonMainInfo")
+                            .card.mt-3
+                                .card-header
+                                    h4.mb-0.d-flex.align-items-center
+                                        i.bi.bi-plus-circle.me-2
+                                        .me-auto Informação Extra
+                                .card-body
+                                    if error_acordao && error_acordao["Mais Informação"]
+                                        textarea.form-control(name="Mais Informação")=error_acordao["Mais Informação"]
+                                    else
+                                        textarea.form-control(name="Mais Informação")
+                                    
                         .col-4
                             .card.mb-3
                                 .card-header

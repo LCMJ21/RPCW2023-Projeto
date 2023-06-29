@@ -1,15 +1,36 @@
 mixin card_entry(key, value)
-    if value
+    - var has_value = value && value != ""
+    if has_value
         h6.fw-normal
             p.fw-bold.d-inline #{key}: 
             p.d-inline #{value}
 
-mixin make_labels(labels)
+mixin make_labels(labels, id=undefined, hide=false)
     if labels
         - var sorted_labels = labels.sort()
             .mb-2
-                for label in sorted_labels
-                    span.badge.bg-primary.me-1= label
+                if sorted_labels.length > 2 && hide
+                    span.badge.bg-primary.me-1 #{sorted_labels.shift()}
+                    span.badge.bg-primary.me-1 #{sorted_labels.shift()}
+                    for label in sorted_labels
+                        span.badge.bg-primary.me-1.collapse.rm-collapsing(id="collapse"+id)= label
+                    btn.btn.text-primary.remove-border(type="button" data-bs-toggle="collapse" data-bs-target="#collapse"+id)
+                        i.bi.bi-plus-circle.collapse.show.rm-collapsing(id="collapse"+id)
+                        i.bi.bi-dash-circle.collapse.rm-collapsing(id="collapse"+id)
+                else
+                    for label in sorted_labels
+                        span.badge.bg-primary.me-1= label
+
+mixin add_input(key_key, key, key_value, value, options)
+    .input-group.mb-3(id=key_key)
+        select.form-select(name=key_key)
+            option(value=key selected)= key
+            for option in options
+                if option != key
+                    option(value=option)= option
+        input.form-control.mw-100(name=key_value value=value)
+        button.btn.btn-outline-danger(type="button" onclick="removeElementById('"+key_key+"')") 
+            i.bi.bi-dash-lg
 
 mixin add_acordao_elements_errors(old_elements, section, options)
     - var new_key_key, new_key_value
@@ -22,15 +43,7 @@ mixin add_acordao_elements_errors(old_elements, section, options)
                 - new_key_value = value
             else
                 - new_value_key = "re"+key
-                .input-group.mb-3(id=new_key_key)
-                    select.form-select(name=new_key_key)
-                        option(value=new_key_value selected)= new_key_value
-                        for option in options
-                            if option != new_key_value
-                                option(value=option)= option
-                    input.form-control(name=new_value_key value=value)
-                    button.btn.btn-outline-danger(type="button" onclick="removeElementById('"+new_key_key+"')") 
-                        i.bi.bi-dash-lg
+                +add_input(new_key_key, new_key_value, new_value_key, value, options)
 
 mixin add_acordao_elements_old(oldAccordian, key_addon, options)
     - var new_key_key, new_value_key
@@ -39,15 +52,14 @@ mixin add_acordao_elements_old(oldAccordian, key_addon, options)
         - new_value_key = key + key_addon + ".value"
         - var is_section = options.includes(key) && value
         if is_section
-            .input-group.mb-3(id=new_key_key)
-                select.form-select(name=new_key_key)
-                    option(value=key selected)= key
-                    for option in options
-                        if option != key
-                            option(value=option)= option
-                input.form-control(name=new_value_key value=value)
-                button.btn.btn-outline-danger(type="button" onclick="removeElementById('"+new_key_key+"')") 
-                    i.bi.bi-dash-lg
+            -var is_list = Array.isArray(value)
+            if is_list
+                -var cc = 0
+                for list_value in value
+                    - new_key_key = cc + new_key_key, new_value_key = cc + new_value_key, cc += 1
+                    +add_input(new_key_key, key, new_value_key, list_value, options)
+            else
+                +add_input(new_key_key, key, new_value_key, value, options)
 
 mixin make_input_groups(list, add_button_id)
     .d-grid(id=add_button_id)
@@ -65,3 +77,20 @@ mixin input_labels(labels, old_labels)
                 option(value=label)= label
     .invalid-feedback
         | Please select a valid tag.
+
+mixin labelLevel(level)
+    if level == "Administrador"
+        span.badge.rounded-pill.text-bg-danger Administrador
+    else if level == "Produtor"
+        span.badge.rounded-pill.text-bg-warning Produtor
+    else if level == "Consumidor"
+        span.badge.rounded-pill.text-bg-success Consumidor
+    else
+        span.badge.rounded-pill.text-bg-dark #{level}
+
+mixin optionLevel(level)
+    for option in ["Administrador", "Produtor", "Consumidor"]
+        if option == level
+            option(value=option selected)= option
+        else
+            option(value=option)= option

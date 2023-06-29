@@ -18,10 +18,10 @@ block content
                     .d-flex.mb-2
                         .flex-grow-1.me-2
                             if error_acordao && error_acordao.labels
-                                +input_labels([], error_acordao.labels)
+                                +input_labels(error_acordao.labels, error_acordao.labels)
                             else
-                                +input_labels(["A","B","C"], [])
-                        button.btn.btn-outline-success Alterar Acordão
+                                +input_labels(oldAccordion["Descritores"], oldAccordion["Descritores"])
+                        button.btn.btn-outline-success.text-nowrap Alterar Acordão
                     .row
                         .col-8 
                             .card
@@ -36,6 +36,20 @@ block content
                                     else
                                         +add_acordao_elements_old(oldAccordion, "addButtonMainInfo", fieldsDict.main)
                                     +make_input_groups(list_str_main, "addButtonMainInfo")
+                            .card.mt-3
+                                .card-header
+                                    h4.mb-0.d-flex.align-items-center
+                                        i.bi.bi-plus-circle.me-2
+                                        .me-auto Informação Extra
+                                .card-body
+                                    if error_acordao && error_acordao["Mais Informação"]
+                                        - var nlines = error_acordao["Mais Informação"].split(/\r\n|\r|\n/).length;
+                                        textarea.form-control(name="Mais Informação" rows=nlines)=error_acordao["Mais Informação"]
+                                    else if oldAccordion["Mais Informação"]
+                                        - var nlines = oldAccordion["Mais Informação"].split(/\r\n|\r|\n/).length;
+                                        textarea.form-control(name="Mais Informação" rows=nlines)=oldAccordion["Mais Informação"]
+                                    else
+                                        textarea.form-control(name="Mais Informação")
                         .col-4
                             .card.mb-3
                                 .card-header

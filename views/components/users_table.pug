@@ -1,4 +1,5 @@
 include buttons
+include generic
 
 block table
     table.table
@@ -8,23 +9,22 @@ block table
                 th.col Afiliação
                 th.col Acesso
                 th.col Data de Criação
-                th.col
+                th.col 
         tbody
             each elem in table_data
                 tr
 
                     td #{elem.username}
                     td #{elem.afiliation}
-                    td #{elem.level}
+                    td 
+                        +labelLevel(elem.level)
                     td #{elem.dateCreated}
                     td.text-end
                         form(method="POST" action="/users/changePermissions").d-flex.justify-content-between
                             input(type="hidden" name="username" value=elem.username)
-                            select(name="level" id="level")
-                                option(value="Administrador") Administrador
-                                option(value="Consumidor") Consumidor
-                                option(value="Produtor") Produtor
-                            button.btn.btn-primary(type="submit") atualizar
+                            select.form-select.me-3(name="level" id="level")
+                                +optionLevel(elem.level)
+                            button.btn.btn-primary(type="submit") Atualizar
 
 
 

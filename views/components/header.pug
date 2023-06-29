@@ -1,3 +1,4 @@
+include generic
 block header
     header.p-3.text-bg-dark
         .container
@@ -9,18 +10,16 @@ block header
 
                 ul.nav.col-12.col-lg-auto.me-lg-auto.mb-2.justify-content-center.mb-md-0
                     li
-                        a.nav-link.px-2.text-secondary(href="/") Home
+                        a.nav-link.px-2.text-white(href="/") Home
                     if user && user.level === 'Administrador'
                         li
                             a.nav-link.px-2.text-white(href="/users/permissions") Change Permissions
 
                 div.d-flex.align-items-center.text-end
-                    if user && user.level === "Administrador"
-                        .badge.rounded-pill.text-bg-danger.me-2 Administrador
-                    if user && user.level === "Produtor"
-                        .badge.rounded-pill.text-bg-warning.me-2 Produtor
+                    if user && (user.level === "Administrador" || user.level === "Produtor")
+                        +labelLevel(user.level)
                     if user
-                        .me-2 Bem Vindo, #{user.name}!
+                        .me-2.ms-2 Bem Vindo, #{user.name}!
                     form(method="POST" action="/users/logout" ).me-2 
                         button.btn.btn-warning.btn-sm(type="submit") Terminar Sessão
                     a.text-white(href="/users/user")

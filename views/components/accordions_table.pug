@@ -18,7 +18,7 @@ block table
                     td #{elem ["Data do Acordão"]}
                     td #{elem.tribunal}
                     td 
-                        +make_labels(elem["Descritores"])
+                        +make_labels(elem["Descritores"], id=elem.Processo, hide=true)
                     td.text-end.text-nowrap
                         +favorite_button(elem.Processo, user.favorites)
                         if user.level === "Administrador" || user.level === 'Produtor'

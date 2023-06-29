@@ -1,4 +1,5 @@
 extends ../components/base
+include ../components/generic
 
 block content 
     .container.main-page
@@ -25,15 +26,9 @@ block content
                             i.bi.bi-person.me-2
                             | Informação Basica
                     .card-body
-                        h6.fw-normal
-                            p.fw-bold.d-inline Nome: 
-                            p.d-inline #{user.name}
-                        h6.fw-normal
-                            p.fw-bold.d-inline Email: 
-                            p.d-inline #{user.email}
-                        h6.fw-normal
-                            p.fw-bold.d-inline Afiliação: 
-                            p.d-inline #{user.afiliation}
+                        +card_entry("Nome", user.name)
+                        +card_entry("Email", user.email)
+                        +card_entry("Afiliação", user.afiliation)
 
                 .card.mb-4
                     .card-header
@@ -43,10 +38,7 @@ block content
                     .card-body
                         h6.fw-normal
                             p.fw-bold.d-inline Acesso: 
-                            p.d-inline #{user.level}
-                        h6.fw-normal
-                            p.fw-bold.d-inline Data de Registo: 
-                            p.d-inline #{user.dateCreated}
-                        h6.fw-normal
-                            p.fw-bold.d-inline Data de ultimo login: 
-                            p.d-inline #{user.lastAccess}
+                            p.d-inline
+                                +labelLevel(user.level)
+                        +card_entry("Data de Criação", user.dateCreated)
+                        +card_entry("Último login", user.lastAccess)

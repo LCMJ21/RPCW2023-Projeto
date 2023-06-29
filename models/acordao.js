@@ -79,6 +79,13 @@ const fieldsDict = {
     ],
 };
 
+const arraysElements = [
+    'Descritores',
+    'Área Temática',
+    'Recorrido',
+];
+
 const myDB = mongoose.connection.useDb('JusticeDB');
 module.exports = myDB.model('accordion', accordionSchema);
 module.exports.fieldsDict = fieldsDict;
+module.exports.arraysElements = arraysElements;
