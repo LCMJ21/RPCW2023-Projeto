@@ -110,7 +110,6 @@ router.get(
       const user = await getUserInfo(getJwtPayload(req).username);
       const processo = req.params.processo;
       const accordion = await accordions.getAccordion(processo);
-      console.log(accordion);
       if (!accordion) {
         res
           .status(404)

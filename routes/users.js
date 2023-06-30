@@ -39,8 +39,6 @@ router.get("/user", verificaAcesso, async (req, res, next) => {
     user.favorites
   );
 
-  console.log(user)
-
   res.cookie("previousUrl", "/users/user/?page=" + page).render("user/user", {
     title: "Justice user",
     user: user,

@@ -3,13 +3,11 @@ module.exports.paginatedResults = async (model, page, perPage, filter=undefined)
     const endIndex = page * perPage;
     var totalElems;
     if (filter) {
-      console.log("Counting elements");
       totalElems = await model.count(filter).exec();
     }
     else {
       totalElems = await model.estimatedDocumentCount().exec();
     }
-    console.log(totalElems);
     const totalPages = Math.ceil(totalElems / perPage);
 
     const results = {};

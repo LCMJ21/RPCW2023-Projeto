@@ -45,3 +45,7 @@ a {
 .allow-line-break {
     white-space: pre-wrap !important;
 }
+
+.w-65 {
+    width: 65%!important;
+}

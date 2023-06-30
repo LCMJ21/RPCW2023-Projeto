@@ -1,7 +1,6 @@
 module.exports.parse_new_acordao_input = (req, res, next) => {
   const arraysElements = require("../models/acordao").arraysElements;
   const entries = Object.entries(req.body);
-  console.log(entries);
   var acordao = {};
   var new_key;
   for (const [key, value] of entries) {
@@ -17,6 +16,12 @@ module.exports.parse_new_acordao_input = (req, res, next) => {
       const key_list = key.split(".");
       if (key_list[1] === "key") {
         new_key = value;
+        if(!new_key){
+          req.error = true;
+          req.error_msg = "Existem atributos que não foram selecionados!";
+          next();
+          return;
+        }
         if (new_key in acordao && !arraysElements.includes(new_key)) {
           req.error = true;
           req.error_msg =
@@ -54,7 +59,6 @@ module.exports.parse_new_acordao_input = (req, res, next) => {
       return;
     }
   }
-  console.log(acordao);
 
   if (!("Descritores" in acordao)) {
     req.error = true;

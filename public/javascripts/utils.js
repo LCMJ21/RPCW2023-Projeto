@@ -1,6 +1,6 @@
 var cc = 0;
 
-function addElement(list_str, button_id) {
+function addElement(list_str, button_id, textarea) {
     const new_button_id = button_id + cc;
     var newElement = document.createElement("div");
     newElement.className = "input-group mb-3";
@@ -21,13 +21,19 @@ function addElement(list_str, button_id) {
         select.appendChild(option);
     }
     newElement.appendChild(select);
-    var input = document.createElement("input");
-    input.name=button_id+cc+".value"
-    input.className = "form-control";
-    input.type = "text";
-    input.placeholder = "Valor"
-    input.ariaDescribedBy = "button-addon2";
-    newElement.appendChild(input);
+    if (textarea == 'true') {
+        var value = document.createElement("textarea");
+        value.rows=1
+    }
+    else {
+      var value = document.createElement("input");
+      value.type = "text";
+    }
+    value.name=button_id+cc+".value"
+    value.className = "form-control w-65";
+    value.placeholder = "Valor"
+    value.ariaDescribedBy = "button-addon2";
+    newElement.appendChild(value);
     var button = document.createElement("button");
     button.className = "btn btn-outline-danger";
     button.id = "button-addon2";

@@ -22,80 +22,77 @@ block content
                             else
                                 +input_labels(oldAccordion["Descritores"], oldAccordion["Descritores"])
                         button.btn.btn-outline-success.text-nowrap Alterar Acordão
-                    .row
-                        .col-8 
-                            .card
-                                .card-header
-                                    h4.mb-0.d-flex.align-items-center
-                                        i.bi.bi-file-earmark-zip.me-2
-                                        .me-auto Acordão Novo
-                                .card-body
-                                    - const list_str_main = JSON.stringify(fieldsDict.main)
-                                    if error_acordao
-                                        +add_acordao_elements_errors(error_acordao, "addButtonMainInfo",fieldsDict.main)
-                                    else
-                                        +add_acordao_elements_old(oldAccordion, "addButtonMainInfo", fieldsDict.main)
-                                    +make_input_groups(list_str_main, "addButtonMainInfo")
-                            .card.mt-3
-                                .card-header
-                                    h4.mb-0.d-flex.align-items-center
-                                        i.bi.bi-plus-circle.me-2
-                                        .me-auto Informação Extra
-                                .card-body
-                                    if error_acordao && error_acordao["Mais Informação"]
-                                        - var nlines = error_acordao["Mais Informação"].split(/\r\n|\r|\n/).length;
-                                        textarea.form-control(name="Mais Informação" rows=nlines)=error_acordao["Mais Informação"]
-                                    else if oldAccordion["Mais Informação"]
-                                        - var nlines = oldAccordion["Mais Informação"].split(/\r\n|\r|\n/).length;
-                                        textarea.form-control(name="Mais Informação" rows=nlines)=oldAccordion["Mais Informação"]
-                                    else
-                                        textarea.form-control(name="Mais Informação")
-                        .col-4
-                            .card.mb-3
-                                .card-header
-                                    h4.mb-0
-                                        i.bi.bi-globe.me-2
-                                        | Informação Geral
-                                .card-body
-                                    - const list_str_geral = JSON.stringify(fieldsDict.geral)
-                                    if error_acordao
-                                        +add_acordao_elements_errors(error_acordao, "addButtonGeralInfo",fieldsDict.geral)
-                                    else
-                                        +add_acordao_elements_old(oldAccordion, "addButtonGeralInfo", fieldsDict.geral)
-                                    +make_input_groups(list_str_geral, "addButtonGeralInfo")
-                            .card.mb-3
-                                .card-header
-                                    h4.mb-0
-                                        i.bi.bi-person-circle.me-2
-                                        | Entidades Associadas
-                                .card-body
-                                    - const list_str_entidades = JSON.stringify(fieldsDict.entidades)
-                                    if error_acordao
-                                        +add_acordao_elements_errors(error_acordao, "addButtonEntInfo",fieldsDict.entidades)
-                                    else
-                                        +add_acordao_elements_old(oldAccordion, "addButtonEntInfo", fieldsDict.entidades)
-                                    +make_input_groups(list_str_entidades, "addButtonEntInfo")
-                            .card.mb-3
-                                .card-header
-                                    h4.mb-0
-                                        i.bi.bi-calendar4-week.me-2
-                                        |  Datas Importantes
-                                .card-body
-                                    - const list_str_datas = JSON.stringify(fieldsDict.datas)
-                                    if error_acordao
-                                        +add_acordao_elements_errors(error_acordao, "addButtonDataInfo",fieldsDict.datas)
-                                    else
-                                        +add_acordao_elements_old(oldAccordion, "addButtonDataInfo", fieldsDict.datas)
-                                    +make_input_groups(list_str_datas, "addButtonDataInfo")
-                            .card.mb-3
-                                .card-header
-                                    h4.mb-0
-                                        i.bi.bi-info-circle.me-2
-                                        |  Outras Informações
-                                .card-body
-                                    - const list_str_outros = JSON.stringify(fieldsDict.outros)
-                                    if error_acordao
-                                        +add_acordao_elements_errors(error_acordao, "addButtoOutrosInfo",fieldsDict.outros)
-                                    else
-                                        +add_acordao_elements_old(oldAccordion, "addButtoOutrosInfo", fieldsDict.outros)
-                                    +make_input_groups(list_str_outros, "addButtoOutrosInfo")
+                    .card.mb-3
+                        .card-header
+                            h4.mb-0.d-flex.align-items-center
+                                i.bi.bi-file-earmark-zip.me-2
+                                .me-auto Acordão #{processo}
+                        .card-body
+                            - const list_str_main = JSON.stringify(fieldsDict.main)
+                            if error_acordao
+                                +add_acordao_elements_errors(error_acordao, "addButtonMainInfo",fieldsDict.main, textarea=true)
+                            else
+                                +add_acordao_elements_old(oldAccordion, "addButtonMainInfo", fieldsDict.main, textarea=true)
+                            +make_input_groups(list_str_main, "addButtonMainInfo", textarea=true)
+                    .card.mb-3
+                        .card-header
+                            h4.mb-0
+                                i.bi.bi-globe.me-2
+                                | Informação Geral
+                        .card-body
+                            - const list_str_geral = JSON.stringify(fieldsDict.geral)
+                            if error_acordao
+                                +add_acordao_elements_errors(error_acordao, "addButtonGeralInfo",fieldsDict.geral)
+                            else
+                                +add_acordao_elements_old(oldAccordion, "addButtonGeralInfo", fieldsDict.geral)
+                            +make_input_groups(list_str_geral, "addButtonGeralInfo")
+                    .card.mb-3
+                        .card-header
+                            h4.mb-0
+                                i.bi.bi-person-circle.me-2
+                                | Entidades Associadas
+                        .card-body
+                            - const list_str_entidades = JSON.stringify(fieldsDict.entidades)
+                            if error_acordao
+                                +add_acordao_elements_errors(error_acordao, "addButtonEntInfo",fieldsDict.entidades)
+                            else
+                                +add_acordao_elements_old(oldAccordion, "addButtonEntInfo", fieldsDict.entidades)
+                            +make_input_groups(list_str_entidades, "addButtonEntInfo")
+                    .card.mb-3
+                        .card-header
+                            h4.mb-0
+                                i.bi.bi-calendar4-week.me-2
+                                |  Datas Importantes
+                        .card-body
+                            - const list_str_datas = JSON.stringify(fieldsDict.datas)
+                            if error_acordao
+                                +add_acordao_elements_errors(error_acordao, "addButtonDataInfo",fieldsDict.datas)
+                            else
+                                +add_acordao_elements_old(oldAccordion, "addButtonDataInfo", fieldsDict.datas)
+                            +make_input_groups(list_str_datas, "addButtonDataInfo")
+                    .card.mb-3
+                        .card-header
+                            h4.mb-0
+                                i.bi.bi-info-circle.me-2
+                                |  Outras Informações
+                        .card-body
+                            - const list_str_outros = JSON.stringify(fieldsDict.outros)
+                            if error_acordao
+                                +add_acordao_elements_errors(error_acordao, "addButtoOutrosInfo",fieldsDict.outros)
+                            else
+                                +add_acordao_elements_old(oldAccordion, "addButtoOutrosInfo", fieldsDict.outros)
+                            +make_input_groups(list_str_outros, "addButtoOutrosInfo")
+                    .card
+                        .card-header
+                            h4.mb-0.d-flex.align-items-center
+                                i.bi.bi-plus-circle.me-2
+                                .me-auto Informação Extra
+                        .card-body
+                            if error_acordao && error_acordao["Mais Informação"]
+                                - var nlines = error_acordao["Mais Informação"].split(/\r\n|\r|\n/).length;
+                                textarea.form-control(name="Mais Informação" rows=nlines)=error_acordao["Mais Informação"]
+                            else if oldAccordion["Mais Informação"]
+                                - var nlines = oldAccordion["Mais Informação"].split(/\r\n|\r|\n/).length;
+                                textarea.form-control(name="Mais Informação" rows=nlines)=oldAccordion["Mais Informação"]
+                            else
+                                textarea.form-control(name="Mais Informação")

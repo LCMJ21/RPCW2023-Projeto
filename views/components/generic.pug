@@ -21,18 +21,22 @@ mixin make_labels(labels, id=undefined, hide=false)
                     for label in sorted_labels
                         span.badge.bg-primary.me-1= label
 
-mixin add_input(key_key, key, key_value, value, options)
+mixin add_input(key_key, key, key_value, value, options, textarea=false)
     .input-group.mb-3(id=key_key)
         select.form-select(name=key_key)
             option(value=key selected)= key
             for option in options
                 if option != key
                     option(value=option)= option
-        input.form-control.mw-100(name=key_value value=value)
+            if textarea
+                - var ncollums = Math.ceil(value.length / 125)
+                textarea.form-control.w-65(name=key_value rows=ncollums)= value
+            else
+                input.form-control.w-65(name=key_value value=value)
         button.btn.btn-outline-danger(type="button" onclick="removeElementById('"+key_key+"')") 
             i.bi.bi-dash-lg
 
-mixin add_acordao_elements_errors(old_elements, section, options)
+mixin add_acordao_elements_errors(old_elements, section, options, textarea=false)
     - var new_key_key, new_key_value
     for value, key in old_elements
         - var is_section = key.includes(section)
@@ -43,9 +47,9 @@ mixin add_acordao_elements_errors(old_elements, section, options)
                 - new_key_value = value
             else
                 - new_value_key = "re"+key
-                +add_input(new_key_key, new_key_value, new_value_key, value, options)
+                +add_input(new_key_key, new_key_value, new_value_key, value, options, textarea=textarea)
 
-mixin add_acordao_elements_old(oldAccordian, key_addon, options)
+mixin add_acordao_elements_old(oldAccordian, key_addon, options, textarea=false)
     - var new_key_key, new_value_key
     for value, key in oldAccordian
         - new_key_key = key + key_addon + ".key"
@@ -57,13 +61,13 @@ mixin add_acordao_elements_old(oldAccordian, key_addon, options)
                 -var cc = 0
                 for list_value in value
                     - new_key_key = cc + new_key_key, new_value_key = cc + new_value_key, cc += 1
-                    +add_input(new_key_key, key, new_value_key, list_value, options)
+                    +add_input(new_key_key, key, new_value_key, list_value, options, textarea=textarea)
             else
-                +add_input(new_key_key, key, new_value_key, value, options)
+                +add_input(new_key_key, key, new_value_key, value, options, textarea=textarea)
 
-mixin make_input_groups(list, add_button_id)
-    .d-grid(id=add_button_id)
-        button.btn.btn-outline-primary(onclick="addElement("+list+",'"+add_button_id+"')" type="button")
+mixin make_input_groups(list, add_button_id, textarea=false)
+    .d-grid.d-flex.justify-content-center(id=add_button_id)
+        button.btn.btn-outline-primary.w-25(onclick="addElement("+list+",'"+add_button_id+"','"+textarea+"')" type="button")
             i.bi.bi-plus-circle
 
 mixin input_labels(labels, old_labels)

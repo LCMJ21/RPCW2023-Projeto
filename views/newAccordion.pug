@@ -16,13 +16,13 @@ block content
                     .d-flex.mb-2
                         .flex-grow-1.me-2
                             if error_acordao && error_acordao.labels
-                                +input_labels([], error_acordao.labels)
+                                +input_labels(error_acordao.labels, error_acordao.labels)
                             else
                                 +input_labels([], [])
                         button.btn.btn-outline-success.text-nowrap Adicionar Acordão
                     .row
-                        .col-8 
-                            .card
+                        .col-12
+                            .card.mb-3
                                 .card-header
                                     h4.mb-0.d-flex.align-items-center
                                         i.bi.bi-file-earmark-zip.me-2
@@ -31,19 +31,7 @@ block content
                                     - const list_str_main = JSON.stringify(fieldsDict.main)
                                     if error_acordao
                                         +add_acordao_elements_errors(error_acordao, "addButtonMainInfo",fieldsDict.main)
-                                    +make_input_groups(list_str_main, "addButtonMainInfo")
-                            .card.mt-3
-                                .card-header
-                                    h4.mb-0.d-flex.align-items-center
-                                        i.bi.bi-plus-circle.me-2
-                                        .me-auto Informação Extra
-                                .card-body
-                                    if error_acordao && error_acordao["Mais Informação"]
-                                        textarea.form-control(name="Mais Informação")=error_acordao["Mais Informação"]
-                                    else
-                                        textarea.form-control(name="Mais Informação")
-                                    
-                        .col-4
+                                    +make_input_groups(list_str_main, "addButtonMainInfo", textarea=true)
                             .card.mb-3
                                 .card-header
                                     h4.mb-0
@@ -84,4 +72,13 @@ block content
                                     if error_acordao
                                         +add_acordao_elements_errors(error_acordao, "addButtoOutrosInfo",fieldsDict.outros)
                                     +make_input_groups(list_str_outros, "addButtoOutrosInfo")
-
+                            .card
+                                .card-header
+                                    h4.mb-0.d-flex.align-items-center
+                                        i.bi.bi-plus-circle.me-2
+                                        .me-auto Informação Extra
+                                .card-body
+                                    if error_acordao && error_acordao["Mais Informação"]
+                                        textarea.form-control(name="Mais Informação")=error_acordao["Mais Informação"]
+                                    else
+                                        textarea.form-control(name="Mais Informação")
