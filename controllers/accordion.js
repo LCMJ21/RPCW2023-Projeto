@@ -6,7 +6,7 @@ module.exports.list = (page, perPage) => {
 };
 
 module.exports.getUserAccordions = (page, perPage, accordions_ids) => {
-  return pagination.paginatedResults(accordion, page, perPage, { Processo: { $in: accordions_ids } });
+  return pagination.paginatedResultsWhitIds(accordion, page, perPage, "Processo", accordions_ids);
 };
 
 module.exports.getAccordion = (processo) => {

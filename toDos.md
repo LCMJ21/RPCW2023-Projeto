@@ -18,5 +18,4 @@ Descritores tabela diferente Cris
 Eliminar *,. e vazio Cris
 
 keys unique and not null
-Otimizar busca favorito
 Editar utilizador (extra)
