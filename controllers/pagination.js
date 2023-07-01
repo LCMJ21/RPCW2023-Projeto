@@ -43,7 +43,7 @@ module.exports.paginatedResults = async (model, page, perPage, filter=undefined)
         return results;
       }
       else {
-        results.results = await model.find().sort({Processo: 1}).limit(perPage).skip(startIndex).exec();
+        results.results = await model.find().limit(perPage).skip(startIndex).exec();
         return results;
       }
     } catch (e) {

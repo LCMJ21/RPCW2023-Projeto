@@ -8,15 +8,18 @@ block content
                 .card
                     .card-header
                         h4.mb-0.d-flex.align-items-center
-                            .me-auto
+                            .me-2
                                 i.bi.bi-archive.me-2
                                 | Lista de Acordãos
+                            btn.btn.btn-primary.me-auto(type="button" data-bs-toggle="collapse" data-bs-target="#collapsefilters")
+                                i.bi.bi-sliders2
                             div
                                 if user.level === 'Administrador' || user.level === 'Produtor'
                                     a.btn.btn-primary(href="/accordion/new")
                                         i.bi.bi-plus-lg.me-1
                                         | Novo Acordão
                     .card-body
+                        include components/filters
                         - var table_data = accordions
                         - var data_name = "accordions"
                         include components/accordions_table

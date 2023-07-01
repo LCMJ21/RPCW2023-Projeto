@@ -1,3 +1,5 @@
+const { $where } = require("../models/acordao");
+
 module.exports.parse_new_acordao_input = (req, res, next) => {
   const arraysElements = require("../models/acordao").arraysElements;
   const entries = Object.entries(req.body);
@@ -120,7 +122,6 @@ module.exports.edit_accordion = async (req, res, next) => {
   try {
     var accordions = require("../controllers/accordion");
     const result = await accordions.updateAccordion(req.acordao.Processo, req.acordao);
-    console.log(result);
     if (result.errors || result.code === 11000) {
       if (result.code === 11000) {
         req.error_msg = "O Processo " + result.keyValue.Processo + " já existe!";
@@ -145,4 +146,88 @@ module.exports.edit_accordion = async (req, res, next) => {
     next();
     return;
   }
+}
+
+module.exports.handleQuerry = (req, res, next) => {
+  var querry = "";
+  if (req.body) {
+    for (var key in req.body) {
+      var value = req.body[key];
+      if (value && value !== "") {
+        if (key === "Descritores") {
+          if (typeof value === "string") {
+            value = [value];
+          }
+          querry += "Descritores=" + value.join(",") + "&";
+        }
+        else if (key === "processoinputs") {
+          querry += "Processo=" + value + "&";
+        }
+        else if (key === "datainputs") {
+          querry += "Data=" + value + "&";
+        }
+        else if (key === "tribunalinputs") {
+          querry += "tribunal=" + value + "&";
+        }
+        else if (key === "entidadesinputs") {
+          if (typeof value === "string") {
+            value = [value];
+          }
+          querry += "entidades=" + value.join(",") + "&";
+        }      
+      }
+      req.url_querry = querry[querry.length - 1] === "&" ? querry.slice(0, -1) : querry;
+    }
+  }
+  next();
+  return;
+}
+
+module.exports.createFilter = (req, res, next) => {
+  var filter = {};
+  var oldquerry = {};
+  var oldurl = ""
+  const entidades = require("../models/acordao").fieldsDict["entidades"];
+  oldquerry.page = Number(req.query.page || "1");
+
+  if (req.query.Processo && req.query.Processo !== "") {
+    filter["Processo"] = { $eq: req.query.Processo }
+    oldquerry.Processo = req.query.Processo;
+    oldurl += "Processo=" + req.query.Processo + "&";
+  }
+  if (req.query.Data && req.query.Data !== "") {
+    var datel = req.query.Data.split("-");
+    var date = datel[1] + "/" + datel[2] + "/" + datel[0];
+    filter["Data do Acordão"] = { $eq: date };
+    oldquerry.Data = req.query.Data;
+    oldurl += "Data=" + req.query.Data + "&";
+  }
+  if (req.query.tribunal && req.query.tribunal !== "") {
+    filter["tribunal"] = { $eq: req.query.tribunal };
+    oldquerry.tribunal = req.query.tribunal;
+    oldurl += "tribunal=" + req.query.tribunal + "&";
+  }
+  if (req.query.Descritores && req.query.Descritores !== "") {
+    oldurl += "Descritores=" + req.query.Descritores + "&";
+    if (typeof req.query.Descritores === "string") {
+      req.query.Descritores = [req.query.Descritores];
+    }
+    var descritores = req.query.Descritores.split(",");
+    filter["Descritores"] = { $in: descritores };
+    oldquerry.Descritores = descritores;
+  }
+  if (req.query.entidades && req.query.entidades !== "") {
+    oldurl += "entidades=" + req.query.entidades + "&";
+    req.query.entidades = req.query.entidades.split(",");
+    oldquerry.entidades = req.query.entidades;
+    filter["$or"] = [];
+    for (ent of entidades){
+      filter["$or"].push({ [ent]: { $in: req.query.entidades } });
+    }
+  }
+  req.filter = filter;
+  req.oldquerry = oldquerry;
+  req.oldurl = oldurl[oldurl.length - 1] === "&" ? oldurl.slice(0, -1) : oldurl;
+  next();
+  return;
 }

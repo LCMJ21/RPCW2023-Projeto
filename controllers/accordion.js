@@ -1,8 +1,8 @@
 const accordion = require("../models/acordao");
 const pagination = require("./pagination");
 
-module.exports.list = (page, perPage) => {
-  return pagination.paginatedResults(accordion, page, perPage);
+module.exports.list = (page, perPage, filter) => {
+  return pagination.paginatedResults(accordion, page, perPage, filter);
 };
 
 module.exports.getUserAccordions = (page, perPage, accordions_ids) => {

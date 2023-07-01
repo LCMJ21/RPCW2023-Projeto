@@ -71,8 +71,8 @@ mixin make_input_groups(list, add_button_id, textarea=false)
             i.bi.bi-plus-circle
 
 mixin input_labels(labels, old_labels)
-    select.form-select(multiple name="labels" data-allow-new="true")
-        option(value="" selected disabled hidden) Select a tag 
+    select.form-select(multiple id="labelsinputs" name="labels" data-allow-new="true")
+        option(value="" selected disabled hidden) Selecione uma tag 
         for label in labels
             - var is_old = old_labels.includes(label)
             if is_old
@@ -80,7 +80,27 @@ mixin input_labels(labels, old_labels)
             else
                 option(value=label)= label
     .invalid-feedback
-        | Please select a valid tag.
+        | Por favor selecione uma tag válida.
+
+mixin input_labels_not_new(labels, old_labels)
+    select.form-select(multiple id="labelsinputs" name="labels" data-allow-new="false")
+        option(value="" selected disabled hidden) Selecione uma tag
+        for label in labels
+            - var is_old = old_labels.includes(label)
+            if is_old
+                option(value=label selected)= label
+            else
+                option(value=label)= label
+    .invalid-feedback
+        | Por favor selecione uma tag válida.
+
+mixin input_entidades(old_entities)
+    select.form-select(multiple id="entidadesinputs" name="entidadesinputs" data-allow-new="true")
+        option(value="" selected disabled hidden) Adicione entidades
+        for ent in old_entities
+                option(value=ent selected)= ent
+    .invalid-feedback
+        | Por favor selecione uma entidade válida.
 
 mixin labelLevel(level)
     if level == "Administrador"

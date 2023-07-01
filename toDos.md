@@ -1,8 +1,8 @@
 # Processar Dataset e organizar informação Cris
 # Pagina que mostra um acordão Jorge (done)
 # Pagina que mostra todos os acordãos com filtros e ordenação Jorge
-# Pagina que permite criar um acordão Jorge
-# Pagina que permite editar um acordão Jorge
+# Pagina que permite criar um acordão Jorge (done)
+# Pagina que permite editar um acordão Jorge (done)
 # Permitir remover um acordão Jorge (done)
 # Construir sistema de taxonomia Cris 
 # Adicionar favoritos ao model e permitir adição e remoção de favoritos Joao (done)
@@ -17,5 +17,4 @@ Perceber maneira efeciente querys Cris
 Descritores tabela diferente Cris
 Eliminar *,. e vazio Cris
 
-keys unique and not null
 Editar utilizador (extra)

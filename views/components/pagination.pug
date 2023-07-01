@@ -1,4 +1,5 @@
 block pagination
+    - var query = "&" + oldurl 
     .d-flex.flex-row.align-items-center
         p.mb-0 #{table_data.currentElems} of #{table_data.totalElems} #{data_name}
 
@@ -6,14 +7,14 @@ block pagination
             ul.pagination.mb-0
                 if table_data.currentPage != 1
                     li.page-item
-                        a.page-link(href="?page=1") First
+                        a.page-link(href="?page=1" + query) First
                     li.page-item
-                        a.page-link(href="?page=" + (table_data.currentPage - 1)) &lt;
+                        a.page-link(href="?page=" + (table_data.currentPage - 1) + query) &lt;
 
                 if table_data.previousPages
                     each page in table_data.previousPages
                         li.page-item
-                            a.page-link(href="?page=" + page) #{page}
+                            a.page-link(href="?page=" + page + query) #{page}
 
                 li.page-item.active
                     a.page-link.disable() #{table_data.currentPage}
@@ -21,11 +22,11 @@ block pagination
                 if table_data.nextPages
                     each page in table_data.nextPages
                         li.page-item
-                            a.page-link(href="?page=" + page) #{page}
+                            a.page-link(href="?page=" + page + query) #{page}
                 
                 if table_data.currentPage != table_data.totalPages
                     li.page-item
-                        a.page-link(href="?page=" + (table_data.currentPage + 1)) &gt;
+                        a.page-link(href="?page=" + (table_data.currentPage + 1) + query) &gt;
                     li.page-item
-                        a.page-link(href="?page=" + table_data.totalPages) Last
+                        a.page-link(href="?page=" + table_data.totalPages + query) Last
                         

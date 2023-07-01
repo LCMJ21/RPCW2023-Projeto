@@ -2,30 +2,34 @@ include buttons
 include generic
 
 block table
-    table.table
-        thead
-            tr
-                th.col.text-nowrap Processo
-                th.col.text-nowrap Data do Acordão
-                th.col.text-nowrap Tribunal de Origem
-                th.col.text-nowrap Descitores
-                th.col
-        tbody
-            each elem in table_data.results
+    if table_data.results === undefined
+        .alert.alert-warning(role="alert")
+            | Não foram encontrados resultados com os filtros selecionados.
+    else
+        table.table
+            thead
                 tr
-                    td
-                        a(href="/accordion/" + elem.Processo) #{elem.Processo}
-                    td #{elem ["Data do Acordão"]}
-                    td #{elem.tribunal}
-                    td 
-                        +make_labels(elem["Descritores"], id=elem.Processo, hide=true)
-                    td.text-end.text-nowrap
-                        +favorite_button(elem.Processo, user.favorites)
-                        if user.level === "Administrador" || user.level === 'Produtor'
-                            +edit_button(elem.Processo)
-                        if user.level === 'Administrador'
-                            +delete_button(elem.Processo)
+                    th.col.text-nowrap Processo
+                    th.col.text-nowrap Data do Acordão
+                    th.col.text-nowrap Tribunal de Origem
+                    th.col.text-nowrap Descitores
+                    th.col
+            tbody
+                each elem in table_data.results
+                    tr
+                        td
+                            a(href="/accordion/" + elem.Processo) #{elem.Processo}
+                        td #{elem ["Data do Acordão"]}
+                        td #{elem.tribunal}
+                        td 
+                            +make_labels(elem["Descritores"], id=elem.Processo, hide=true)
+                        td.text-end.text-nowrap
+                            +favorite_button(elem.Processo, user.favorites)
+                            if user.level === "Administrador" || user.level === 'Produtor'
+                                +edit_button(elem.Processo)
+                            if user.level === 'Administrador'
+                                +delete_button(elem.Processo)
 
 
-    block pagination
-        include pagination
+        block pagination
+            include pagination
