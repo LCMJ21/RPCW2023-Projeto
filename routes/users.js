@@ -96,6 +96,35 @@ router.post(
   }
 );
 
+router.get("/edit", verificaAcesso, async function (req, res, next) {
+  const user = await userController.getUserInfo(getJwtPayload(req).username);
+  res.render("user/edit", {
+    title: "Justice edit user",
+    user: user,
+  });
+});
+
+router.post("/edit", verificaAcesso, async function (req, res, next) {
+  const user = await userController.getUserInfo(getJwtPayload(req).username);
+  userModel.findOneAndUpdate(
+    { username: user.username },
+    {
+      username: req.body.username,
+      name: req.body.name,
+      email: req.body.email,
+      afiliation: req.body.afiliation,
+      password: req.body.password,
+    },
+    { new: true }
+  ).then((u) => {
+    res.redirect("/users/user");
+  }
+  ).catch(err => {
+    res.render("error", { error: err });
+  }
+  );
+});
+
 router.post("/register", function (req, res, next) {
   var data = new Date().toISOString().substring(0, 16);
   userModel.register(

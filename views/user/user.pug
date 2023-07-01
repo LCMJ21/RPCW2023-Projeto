@@ -19,7 +19,6 @@ block content
                         - var data_name = "Acordãos Favoritos"
                         include ../components/accordions_table
             .col-3
-
                 .card.mb-4
                     .card-header
                         h4.mb-0
@@ -27,6 +26,7 @@ block content
                             | Informação Basica
                     .card-body
                         +card_entry("Nome", user.name)
+                        +card_entry("Username", user.username)
                         +card_entry("Email", user.email)
                         +card_entry("Afiliação", user.afiliation)
 
@@ -42,3 +42,5 @@ block content
                                 +labelLevel(user.level)
                         +card_entry("Data de Criação", user.dateCreated)
                         +card_entry("Último login", user.lastAccess)
+                .row.me-1.ms-1
+                    a.btn.btn-primary(href="/users/edit") Editar Perfil

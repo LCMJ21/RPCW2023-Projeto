@@ -11,6 +11,8 @@ block header
                 ul.nav.col-12.col-lg-auto.me-lg-auto.mb-2.justify-content-center.mb-md-0
                     li
                         a.nav-link.px-2.text-white(href="/") Home
+                    li
+                        a.nav-link.px-2.text-white(href="/users/edit") Editar Perfil
                     if user && user.level === 'Administrador'
                         li
                             a.nav-link.px-2.text-white(href="/users/permissions") Gerir Permissões
