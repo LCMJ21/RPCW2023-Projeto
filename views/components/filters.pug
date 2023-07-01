@@ -1,0 +1,42 @@
+include generic
+
+block filters
+    .card.collapse(id="collapsefilters")
+        .card-body
+            form(action="search" method="post")
+                .mb-2
+                    label.form-label(for="labelsinputs") Labels
+                    if oldquerry.labels
+                        +input_labels_not_new(oldquerry.labels, oldquerry.labels)
+                    else
+                        +input_labels_not_new([], [])
+                .row.mb-3
+                    .col-6
+                        .mb-2
+                            label.form-label(for="processoinputs") Processo
+                            if oldquerry.Processo
+                                input.form-control#processoinputs(type="text" name="processoinputs" placeholder="Processo" value=oldquerry.Processo)
+                            else
+                                input.form-control#processoinputs(type="text" name="processoinputs" placeholder="Processo")
+                        label.form-label(for="entidadesinputs") Entidades
+                        if oldquerry.entidades
+                            +input_entidades(oldquerry.entidades)
+                        else
+                            +input_entidades([])
+                    .col-6
+                        .mb-2
+                            label.form-label(for="tribunalinputs") Tribunal de Origem
+                            if oldquerry.tribunal
+                                input.form-control#tribunalinputs(type="text" name="tribunalinputs" placeholder="tribunal" value=oldquerry.tribunal)
+                            else
+                                input.form-control#tribunalinputs(type="text" name="tribunalinputs" placeholder="tribunal")
+                        label.form-label(for="datainputs") Data do Acordão
+                        if oldquerry.Data
+                            input.form-control#datainputs(type="date" name="datainputs" placeholder="dd/mm/aaaa" value=oldquerry.Data)
+                        else
+                            input.form-control#datainputs(type="date" name="datainputs" placeholder="dd/mm/aaaa")
+                .d-flex.justify-content-end
+                    a.btn.btn-secondary.me-2(href="/") Limpar
+                    button.btn.btn-success Pesquisar
+
+
