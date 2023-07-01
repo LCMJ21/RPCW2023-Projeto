@@ -13,7 +13,7 @@ block header
                         a.nav-link.px-2.text-white(href="/") Home
                     if user && user.level === 'Administrador'
                         li
-                            a.nav-link.px-2.text-white(href="/users/permissions") Change Permissions
+                            a.nav-link.px-2.text-white(href="/users/permissions") Gerir Permissões
 
                 div.d-flex.align-items-center.text-end
                     if user && (user.level === "Administrador" || user.level === "Produtor")

@@ -7,7 +7,7 @@ block pagination
             ul.pagination.mb-0
                 if table_data.currentPage != 1
                     li.page-item
-                        a.page-link(href="?page=1" + query) First
+                        a.page-link(href="?page=1" + query) Primeira
                     li.page-item
                         a.page-link(href="?page=" + (table_data.currentPage - 1) + query) &lt;
 
@@ -28,5 +28,5 @@ block pagination
                     li.page-item
                         a.page-link(href="?page=" + (table_data.currentPage + 1) + query) &gt;
                     li.page-item
-                        a.page-link(href="?page=" + table_data.totalPages + query) Last
+                        a.page-link(href="?page=" + table_data.totalPages + query) Última
                         
