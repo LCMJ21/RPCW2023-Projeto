@@ -1,0 +1,40 @@
+extends ../components/base
+include ../components/generic
+
+block content 
+    .container.main-page
+        .row
+            include ../components/breadcrumb
+                li.breadcrumb-item 
+                    a(href="/users/user") Página do Utilizador
+                li.breadcrumb-item.active(aria-current="page") Editar Utilizador
+        form.row(action="/users/edit" method="post")
+            .col-12
+                .card.mb-4
+                    .card-header
+                        .d-flex.align-items-center
+                            h4.mb-0.flex-grow-1
+                                i.bi.bi-person.me-2
+                                | Informação Basica
+                            button.btn.btn-success Editar Perfil
+                    .card-body.d-flex.flex-column 
+                        label.mb-2(for='Name') Nome
+                            .input-group
+                                .input-group-text
+                                    i.bi.bi-person-fill
+                                input.form-control(type='text' placeholder='Name' name='name' value=user.name required)
+                        label.mb-2(for='username') Username
+                            .input-group
+                                .input-group-text
+                                    i.bi.bi-person-fill
+                                input.form-control(type='text' placeholder='Username' name='username' value=user.username required)
+                        label.mb-2(for='username') Email
+                            .input-group
+                                .input-group-text
+                                    i.bi.bi-envelope-fill
+                                input.form-control(type='email' placeholder='Email' name='email' value=user.email required)
+                        label.mb-2(for='afiliation') Afiliation
+                            .input-group
+                                .input-group-text
+                                    i.bi.bi-award-fill
+                                input.form-control(type='text' placeholder='Afiliation' name='afiliation' value=user.afiliation)
