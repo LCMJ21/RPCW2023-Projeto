@@ -12,7 +12,7 @@ block content
                         a(href="/accordion/" + processo) Acordão #{processo} 
                     li.breadcrumb-item.active(aria-current="page") Editar Acordão #{processo}
                 if error
-                    .alert.alert-danger(role="alert")
+                    .alert.alert-danger.allow-line-break(role="alert")
                         | #{error}
                 form(action="" method="post")
                     .d-flex.mb-2

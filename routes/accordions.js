@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 const fieldsDict = require("../models/acordao").fieldsDict;
 var accordions = require("../controllers/accordion");
-const { parse_new_acordao_input } = require("../utils/parse_input");
+const { parse_new_acordao_input, add_accordion, edit_accordion } = require("../utils/parse_input");
 const {
   verificaAcesso,
   verificaAdminAcesso,
@@ -34,10 +34,11 @@ router.post(
   "/accordion/new",
   verificaAcesso,
   parse_new_acordao_input,
+  add_accordion,
   async function (req, res, next) {
     try {
+      const user = await getUserInfo(getJwtPayload(req).username);
       if (req.error) {
-        const user = await getUserInfo(getJwtPayload(req).username);
         res.render("newAccordion", {
           title: "Novo Acordão",
           fieldsDict: fieldsDict,
@@ -46,7 +47,7 @@ router.post(
           user,
         });
       } else {
-        res.redirect("/accordion/new");
+        res.redirect("/accordion/" + req.acordao.Processo);
       }
     } catch (err) {
       res.render("error", { error: err });
@@ -67,6 +68,7 @@ router.post(
   "/accordion/edit/:processo",
   verificaAcesso,
   parse_new_acordao_input,
+  edit_accordion,
   async function (req, res, next) {
     try {
       const processo = req.params.processo;
@@ -81,7 +83,7 @@ router.post(
           user,
         });
       } else {
-        res.redirect("/accordion/edit/" + processo);
+        res.redirect("/accordion/" + processo);
       }
     } catch (err) {
       res.render("error", { error: err });

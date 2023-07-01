@@ -20,3 +20,21 @@ module.exports.deleteAccordion = (processo) => {
     .then((result) => result)
     .catch((err) => err);
 }
+
+module.exports.createAccordion = (acordao) => {
+  return accordion.create(acordao)
+    .then((result) => result)
+    .catch((err) => err);
+}
+
+module.exports.updateAccordion = async (processo, acordao) => {
+  try {
+    await accordion.validate(acordao);
+    return accordion.replaceOne({ Processo: processo }, acordao)
+    .then((result) => result)
+    .catch((err) => err);
+  }
+  catch (err) {
+    return err;
+  }
+}

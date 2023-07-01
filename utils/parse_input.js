@@ -5,7 +5,13 @@ module.exports.parse_new_acordao_input = (req, res, next) => {
   var new_key;
   for (const [key, value] of entries) {
     if (key === "labels") {
-      acordao["Descritores"] = value;
+      if ((typeof value) === "string") {
+        acordao["Descritores"] = [value];
+        req.body[key] = [value];
+      }
+      else {
+        acordao["Descritores"] = value;
+      }
     }
     else if (key === "Mais Informação") {
       if (value) {
@@ -71,3 +77,72 @@ module.exports.parse_new_acordao_input = (req, res, next) => {
   req.error = false;
   next();
 };
+
+module.exports.add_accordion = async (req, res, next) => {
+  if (req.error) {
+    next();
+    return;
+  }
+  try {
+    var accordions = require("../controllers/accordion");
+    const result = await accordions.createAccordion(req.acordao);
+    if (result.errors || result.code === 11000) {
+      if (result.code === 11000) {
+        req.error_msg = "O Processo " + result.keyValue.Processo + " já existe!";
+      } else {
+        req.error_msg = "";
+        for (var key in result.errors) {
+          var error = result.errors[key].properties;
+          req.error_msg += "O atributo " + error.path + " tem que ser preenchido!\n";
+        } 
+      }
+      req.error = true;
+      next();
+      return;
+    }
+    req.error = false;
+    req.acordao = result;
+    next();
+    return;
+  } catch (err) {
+    req.error = true;
+    req.error_msg = err;
+    next();
+    return;
+  }
+}
+
+module.exports.edit_accordion = async (req, res, next) => {
+  if (req.error) {
+    next();
+    return;
+  }
+  try {
+    var accordions = require("../controllers/accordion");
+    const result = await accordions.updateAccordion(req.acordao.Processo, req.acordao);
+    console.log(result);
+    if (result.errors || result.code === 11000) {
+      if (result.code === 11000) {
+        req.error_msg = "O Processo " + result.keyValue.Processo + " já existe!";
+      } else {
+        req.error_msg = "";
+        for (var key in result.errors) {
+          var error = result.errors[key].properties;
+          req.error_msg += "O atributo " + error.path + " tem que ser preenchido!\n";
+        } 
+      }
+      req.error = true;
+      next();
+      return;
+    }
+    req.error = false;
+    req.acordao = result;
+    next();
+    return;
+  } catch (err) {
+    req.error = true;
+    req.error_msg = err;
+    next();
+    return;
+  }
+}

@@ -10,7 +10,7 @@ block content
                         a(href="/") Lista de Acordãos 
                     li.breadcrumb-item.active(aria-current="page") Acordão Novo
                 if error
-                    .alert.alert-warning(role="alert")
+                    .alert.alert-danger.allow-line-break(role="alert")
                         | #{error}
                 form(action="" method="post")
                     .d-flex.mb-2
