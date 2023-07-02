@@ -1,4 +1,4 @@
-# Website de Acordãos
+# Website de Acórdãos
 
 Realizado por:
 - Cristiano Pereira - PG50304
