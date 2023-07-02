@@ -7,9 +7,9 @@ block filters
                 .mb-2
                     label.form-label(for="labelsinputs") Labels
                     if oldquerry.labels
-                        +input_labels_not_new(oldquerry.labels, oldquerry.labels)
+                        +input_labels_not_new(labels, oldquerry.labels)
                     else
-                        +input_labels_not_new([], [])
+                        +input_labels_not_new(labels, [])
                 .row.mb-3
                     .col-6
                         .mb-2

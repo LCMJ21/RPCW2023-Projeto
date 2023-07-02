@@ -16,9 +16,9 @@ block content
                     .d-flex.mb-2
                         .flex-grow-1.me-2
                             if error_acordao && error_acordao.labels
-                                +input_labels(error_acordao.labels, error_acordao.labels)
+                                +input_labels(labels, error_acordao.labels)
                             else
-                                +input_labels([], [])
+                                +input_labels(labels, [])
                         button.btn.btn-outline-success.text-nowrap Adicionar Acordão
                     .row
                         .col-12

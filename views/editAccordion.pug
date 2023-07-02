@@ -18,9 +18,9 @@ block content
                     .d-flex.mb-2
                         .flex-grow-1.me-2
                             if error_acordao && error_acordao.labels
-                                +input_labels(error_acordao.labels, error_acordao.labels)
+                                +input_labels(labels, error_acordao.labels)
                             else
-                                +input_labels(oldAccordion["Descritores"], oldAccordion["Descritores"])
+                                +input_labels(labels, oldAccordion["Descritores"])
                         button.btn.btn-outline-success.text-nowrap Alterar Acordão
                     .card.mb-3
                         .card-header

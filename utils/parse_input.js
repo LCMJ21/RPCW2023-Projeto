@@ -154,7 +154,7 @@ module.exports.handleQuerry = (req, res, next) => {
     for (var key in req.body) {
       var value = req.body[key];
       if (value && value !== "") {
-        if (key === "Descritores") {
+        if (key === "labels") {
           if (typeof value === "string") {
             value = [value];
           }
@@ -209,9 +209,6 @@ module.exports.createFilter = (req, res, next) => {
   }
   if (req.query.Descritores && req.query.Descritores !== "") {
     oldurl += "Descritores=" + req.query.Descritores + "&";
-    if (typeof req.query.Descritores === "string") {
-      req.query.Descritores = [req.query.Descritores];
-    }
     var descritores = req.query.Descritores.split(",");
     filter["Descritores"] = { $in: descritores };
     oldquerry.Descritores = descritores;
