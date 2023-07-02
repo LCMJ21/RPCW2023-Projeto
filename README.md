@@ -6,6 +6,9 @@ Realizado por:
 - Jorge Lima - PG50506
 
 ---
+**NOTA:** Datasets não estão presentes no repositório devido à sua dimensão. É possível aceder ao ficheiro pelo seguinte link https://we.tl/t-HUIQTO499B.
+
+---
 
 No âmbito da unidade curricular *Representação e Processamento de Conhecimento na Web*, foi desenvolvido este projeto, que consiste num website de Acórdãos, onde os dados utilizados foram fornecidos pelo professor e processados pelo grupo para o desenvolvimento do website. No desenvolvimento deste projeto, foram utilizados os conhecimentos adquiridos tanto em *JavaScript*, como também bibliotecas amplamente utilizadas, e no software de base de dados *MongoDB*.
 
