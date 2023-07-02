@@ -30,7 +30,6 @@ module.exports.createAccordion = (acordao) => {
 
 module.exports.updateAccordion = async (id, acordao) => {
   try {
-    console.log(id);
     await accordion.validate(acordao);
     return accordion.replaceOne({ _id: id }, acordao)
     .then((result) => result)

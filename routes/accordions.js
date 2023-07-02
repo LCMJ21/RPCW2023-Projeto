@@ -19,7 +19,6 @@ router.get("/", verificaAcesso, createFilter, async function (req, res, next) {
     const user = await getUserInfo(getJwtPayload(req).username);
     const perPage = 20;
     const accordions_list = await accordions.list(req.oldquerry.page, perPage, req.filter);
-    console.log(req.oldurl);
     res.cookie("previousUrl", "/?page=" + req.oldquerry.page + "&" + req.oldurl).render("homepage", {
       title: "Justice homepage",
       accordions: accordions_list,
