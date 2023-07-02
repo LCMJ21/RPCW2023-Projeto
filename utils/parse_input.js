@@ -121,7 +121,7 @@ module.exports.edit_accordion = async (req, res, next) => {
   }
   try {
     var accordions = require("../controllers/accordion");
-    const result = await accordions.updateAccordion(req.acordao.Processo, req.acordao);
+    const result = await accordions.updateAccordion(req.params.id, req.acordao);
     if (result.errors || result.code === 11000) {
       if (result.code === 11000) {
         req.error_msg = "O Processo " + result.keyValue.Processo + " já existe!";

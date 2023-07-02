@@ -16,5 +16,3 @@ https://docs.google.com/presentation/d/1pTDT-6-o7x216G2ADKUyiLRXtPrPoUs7VqaRjqNn
 Perceber maneira efeciente querys Cris
 Descritores tabela diferente Cris
 Eliminar *,. e vazio Cris
-
-Editar utilizador (extra)

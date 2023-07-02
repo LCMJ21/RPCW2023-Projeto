@@ -19,7 +19,7 @@ const accordionSchema = new mongoose.Schema({
     'Nº do Documento': String,
     Objecto: String,
     Privacidade: String,
-    Processo: {type: String, unique: true, required: true},
+    Processo: String,
     Recorrente: String,
     Recorrido: Array,
     'Referência a Doutrina': String,

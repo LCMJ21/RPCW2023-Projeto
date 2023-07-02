@@ -5,18 +5,19 @@ module.exports.list = (page, perPage, filter) => {
   return pagination.paginatedResults(accordion, page, perPage, filter);
 };
 
-module.exports.getUserAccordions = (page, perPage, accordions_ids) => {
-  return pagination.paginatedResultsWhitIds(accordion, page, perPage, "Processo", accordions_ids);
+module.exports.getUserAccordions = (page, perPage, ids) => {
+  
+  return pagination.paginatedResultsWhitIds(accordion, page, perPage, "_id", ids);
 };
 
-module.exports.getAccordion = (processo) => {
-  return accordion.findOne({ Processo: processo })
+module.exports.getAccordion = (id) => {
+  return accordion.findOne({ _id: id })
     .then((result) => result)
     .catch((err) => err);
 };
 
-module.exports.deleteAccordion = (processo) => {
-  return accordion.findOneAndDelete({ Processo: processo })
+module.exports.deleteAccordion = (id) => {
+  return accordion.findOneAndDelete({ _id: id })
     .then((result) => result)
     .catch((err) => err);
 }
@@ -27,10 +28,11 @@ module.exports.createAccordion = (acordao) => {
     .catch((err) => err);
 }
 
-module.exports.updateAccordion = async (processo, acordao) => {
+module.exports.updateAccordion = async (id, acordao) => {
   try {
+    console.log(id);
     await accordion.validate(acordao);
-    return accordion.replaceOne({ Processo: processo }, acordao)
+    return accordion.replaceOne({ _id: id }, acordao)
     .then((result) => result)
     .catch((err) => err);
   }

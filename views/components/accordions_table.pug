@@ -18,17 +18,17 @@ block table
                 each elem in table_data.results
                     tr
                         td
-                            a(href="/accordion/" + elem.Processo) #{elem.Processo}
+                            a(href="/accordion/" + elem.id) #{elem.Processo}
                         td #{elem ["Data do Acordão"]}
                         td #{elem.tribunal}
                         td 
-                            +make_labels(elem["Descritores"], id=elem.Processo, hide=true)
+                            +make_labels(elem["Descritores"], id=elem.id, hide=true)
                         td.text-end.text-nowrap
-                            +favorite_button(elem.Processo, user.favorites)
+                            +favorite_button(elem.id, user.favorites)
                             if user.level === "Administrador" || user.level === 'Produtor'
-                                +edit_button(elem.Processo)
+                                +edit_button(elem.id)
                             if user.level === 'Administrador'
-                                +delete_button(elem.Processo)
+                                +delete_button(elem.id)
 
 
         block pagination

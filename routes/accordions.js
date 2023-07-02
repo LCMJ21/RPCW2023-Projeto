@@ -59,7 +59,7 @@ router.post(
           user,
         });
       } else {
-        res.redirect("/accordion/" + req.acordao.Processo);
+        res.redirect("/accordion/" + req.acordao.id);
       }
     } catch (err) {
       res.render("error", { error: err });
@@ -77,25 +77,26 @@ router.get("/accordion/new", verificaAcesso, async function (req, res, next) {
 });
 
 router.post(
-  "/accordion/edit/:processo",
+  "/accordion/edit/:id",
   verificaAcesso,
   parse_new_acordao_input,
   edit_accordion,
   async function (req, res, next) {
     try {
-      const processo = req.params.processo;
+      const id = req.params.id;
       if (req.error) {
         const user = await getUserInfo(getJwtPayload(req).username);
         res.render("editAccordion", {
-          title: "Editar Acordão" + processo,
+          title: "Editar Acordão" + req.body.Processo,
+          process: req.body.Processo,
+          id: id,
           fieldsDict: fieldsDict,
-          processo: processo,
           error_acordao: req.body,
           error: req.error_msg,
           user,
         });
       } else {
-        res.redirect("/accordion/" + processo);
+        res.redirect("/accordion/" + id);
       }
     } catch (err) {
       res.render("error", { error: err });
@@ -103,13 +104,14 @@ router.post(
   }
 );
 
-router.get("/accordion/edit/:processo", verificaAcesso, async function (req, res, next) {
+router.get("/accordion/edit/:id", verificaAcesso, async function (req, res, next) {
   const user = await getUserInfo(getJwtPayload(req).username);
-  const processo = req.params.processo;
-  const accordion = await accordions.getAccordion(processo);
+  const id = req.params.id;
+  const accordion = await accordions.getAccordion(id);
   res.render("editAccordion", {
-    title: "Editar Acordão " + processo,
-    processo: processo,
+    title: "Editar Acordão " + accordion.Processo,
+    id: id,
+    process: accordion.Processo,
     fieldsDict: fieldsDict,
     oldAccordion: accordion,
     user,
@@ -117,21 +119,21 @@ router.get("/accordion/edit/:processo", verificaAcesso, async function (req, res
 });
 
 router.get(
-  "/accordion/:processo",
+  "/accordion/:id",
   verificaAcesso,
   async function (req, res, next) {
     try {
       const user = await getUserInfo(getJwtPayload(req).username);
-      const processo = req.params.processo;
-      const accordion = await accordions.getAccordion(processo);
+      const id = req.params.id;
+      const accordion = await accordions.getAccordion(id);
       if (!accordion) {
         res
           .status(404)
-          .render("error", { error: "Accordion" + processo + "not found" });
+          .render("error", { error: "Accordion" + id + "not found" });
         return;
       }
       res
-        .cookie("previousUrl", "/accordion/" + req.params.processo)
+        .cookie("previousUrl", "/accordion/" + req.params.id)
         .render("accordion", {
           title: "Accordion " + accordion.Processo,
           fieldsDict: fieldsDict,
@@ -145,13 +147,11 @@ router.get(
 );
 
 router.get(
-  "/accordion/delete/:processo",
+  "/accordion/delete/:id",
   verificaAdminAcesso,
   async function (req, res, next) {
     try {
-      const user = await getUserInfo(getJwtPayload(req).username);
-
-      await accordions.deleteAccordion(req.params.processo);
+      await accordions.deleteAccordion(req.params.id);
       res.redirect("/");
     } catch (err) {
       res.render("error", { error: err });

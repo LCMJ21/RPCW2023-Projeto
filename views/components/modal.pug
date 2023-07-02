@@ -6,11 +6,11 @@ mixin delete_modal(id)
         .modal-dialog
             .modal-content.text-dark
                 .modal-header.bg-dark.text-white
-                    h1.modal-title.fs-5(id=modal_id)
-                        i.bi.bi-exclamation-triangle 
+                    h1.modal-title.fs-5.text-wrap.text-start(id=modal_id)
+                        i.bi.bi-exclamation-triangle
                         | Remover Acordão #{id}?
                     button.btn-close.btn-close-white(type='button' data-bs-dismiss='modal' aria-label='Close')
-                .modal-body
+                .modal-body.text-wrap.text-start
                     | Esta ação é irreversível! Tem a certeza que pretende remover o acordão #{id}?
                 .modal-footer
                     button.btn.btn-dark(type='button' data-bs-dismiss='modal') Close

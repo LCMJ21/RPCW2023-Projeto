@@ -17,11 +17,11 @@ block content
                         h4.mb-0.d-flex.align-items-center
                             i.bi.bi-file-earmark-zip.me-2
                             .me-auto Acordão #{accordion.Processo}
-                            +favorite_button(accordion.Processo, user.favorites)
+                            +favorite_button(accordion.id, user.favorites)
                             if user.level === "Administrador" || user.level === 'Produtor'
-                                +edit_button(accordion.Processo)
+                                +edit_button(accordion.id)
                             if user.level === 'Administrador'
-                                +delete_button(accordion.Processo)
+                                +delete_button(accordion.id)
                     .card-body
                         each key in fieldsDict.main
                             +card_entry(key, accordion[key])
