@@ -113,7 +113,7 @@ Para guardar informações sobre os utilizadores do website, foi criada uma base
 Após ter construido a base de dados, o grupo desenvolveu um *website* que permite a visualização dos dados da base de dados, bem como a sua manipulação. O *website* é contém as seguintes funcionalidades:
 ### Login
 
-O *website* contém um sistema de* login*, permitindo que apenas utilizadores registados possam aceder ao *website*. Este contém um sistema de autenticação, que verifica se o utilizador está registado, e se a *password* está correta. Caso o utilizador não esteja registado, ou a *password* esteja incorreta, o utilizador não consegue aceder ao *website*.
+O *website* contém um sistema de *login*, permitindo que apenas utilizadores registados possam aceder ao *website*. Este contém um sistema de autenticação, que verifica se o utilizador está registado, e se a *password* está correta. Caso o utilizador não esteja registado, ou a *password* esteja incorreta, o utilizador não consegue aceder ao *website*.
 
 ![Página de login](images/login.png)
 
