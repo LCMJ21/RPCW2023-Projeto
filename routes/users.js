@@ -17,7 +17,7 @@ router.get("/login", function (req, res, next) {
   if (req.cookies["token"]) {
     res.redirect("/");
   }
-  res.render("user/login", { title: "Justice login" });
+  res.render("user/login", { title: "Justiça login" });
 });
 
 /* GET users listing. */
@@ -25,7 +25,7 @@ router.get("/register", function (req, res, next) {
   if (req.cookies["token"]) {
     res.redirect("/");
   }
-  res.render("user/register", { title: "Justice register" });
+  res.render("user/register", { title: "Justiça register" });
 });
 
 /* GET users listing. */
@@ -40,7 +40,7 @@ router.get("/user", verificaAcesso, async (req, res, next) => {
   );
 
   res.cookie("previousUrl", "/users/user/?page=" + page).render("user/user", {
-    title: "Justice user",
+    title: user.name + " Page",
     user: user,
     userAccordions: userAccordions,
   });
@@ -74,7 +74,7 @@ router.get(
       const user = await userController.getUserInfo(getJwtPayload(req).username);
       const users = await userController.getUsers();
       res.render("user/permissions", {
-        title: "Justice permissions",
+        title: "Permissões de utilizadores",
         users,
         user,
       });
@@ -99,7 +99,7 @@ router.post(
 router.get("/edit", verificaAcesso, async function (req, res, next) {
   const user = await userController.getUserInfo(getJwtPayload(req).username);
   res.render("user/edit", {
-    title: "Justice edit user",
+    title: user.name + " edição",
     user: user,
   });
 });
