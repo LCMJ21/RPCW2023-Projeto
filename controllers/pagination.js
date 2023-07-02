@@ -3,10 +3,10 @@ module.exports.paginatedResults = async (model, page, perPage, filter=undefined)
     const endIndex = page * perPage;
     var totalElems;
     if (filter) {
-      totalElems = await model.count(filter).exec();
+      totalElems = await model.count(filter).limit((page+10)*perPage).exec();
     }
     else {
-      totalElems = await model.estimatedDocumentCount().exec();
+      totalElems = await model.estimatedDocumentCount().limit((page+10)*perPage).exec();
     }
     const totalPages = Math.ceil(totalElems / perPage);
 

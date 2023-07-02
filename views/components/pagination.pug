@@ -1,13 +1,16 @@
 block pagination
     - var query = "&" + oldurl 
     .d-flex.flex-row.align-items-center
-        p.mb-0 #{table_data.currentElems} of #{table_data.totalElems} #{data_name}
+        p.mb-0 #{data_name} number #{table_data.currentElems-table_data.results.length} to #{table_data.currentElems} 
 
         nav.ms-auto
             ul.pagination.mb-0
                 if table_data.currentPage != 1
                     li.page-item
-                        a.page-link(href="?page=1" + query) Primeira
+                        if table_data.currentPage > 10
+                            a.page-link(href="?page=" + (table_data.currentPage - 10) + query) &lt;&lt;
+                        else
+                            a.page-link(href="?page=1" + query) &lt;&lt;
                     li.page-item
                         a.page-link(href="?page=" + (table_data.currentPage - 1) + query) &lt;
 
@@ -28,5 +31,5 @@ block pagination
                     li.page-item
                         a.page-link(href="?page=" + (table_data.currentPage + 1) + query) &gt;
                     li.page-item
-                        a.page-link(href="?page=" + table_data.totalPages + query) Última
+                        a.page-link(href="?page=" + table_data.totalPages + query) &gt;&gt;
                         
