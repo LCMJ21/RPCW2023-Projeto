@@ -1,23 +1,109 @@
 # Website de Acordãos
 
 Realizado por:
-
 - Cristiano Pereira - PG50304
-- João Martins - PG
+- João Martins - PG50463
 - Jorge Lima - PG50506
 
 ---
-
-## Introdução
 
 No âmbito da unidade curricular *Representação e Processamento de Conhecimento na Web*, foi desenvolvido este projeto, que consiste num website de Acórdãos, onde os dados utilizados foram fornecidos pelo professor e processados pelo grupo para o desenvolvimento do website. No desenvolvimento deste projeto, foram utilizados os conhecimentos adquiridos tanto em *JavaScript*, como também bibliotecas amplamente utilizadas, e no software de base de dados *MongoDB*.
 
 ## Como executar
 
+Para executar o website, é importante primeiro carregar a base de dados a utilizar. Devido à dimensão dos ficheiros de dados, estes encontram-se comprimidos no ficheiro *json.zip*. Ao extrair o conteúdo desse arquivo, será criada a diretoria *json* contendo todos os dados necessários. Entre estes ficheiros, encontram-se a lista dos descritores existentes nos acórdãos e as diferentes listas de acórdãos.
+
+Para carregar a lista de descritores, utilize o seguinte comando:
 
 
-## base de dados
+```
+mongoimport --db JusticeDB --collection descriptors --file descritores.json --jsonArray
+```
 
+Para carregar os acórdãos, é necessário executar o seguinte comando para todos os restantes ficheiros:
+
+```
+mongoimport --db JusticeDB --collection accordions --file [nome do ficheiro] --jsonArray
+```
+
+Depois da base de dados estar pronta, é necessário instalar as bibliotecas necessárias para o projeto utilizando o comando:
+
+```
+npm install
+```
+
+E, por fim, utilizar o comando:
+
+```
+npm start
+```
+
+Isto irá executar o programa, permitindo o acesso ao website através de https://localhost:7000.
+
+
+## Processamento de Dados
+
+Uma fase importante deste projeto foi o processamento de dados. Devido à enormidade dos ficheiros em questão, que continham mais de 400 mil entradas, foi necessário realizar um extenso processamento de dados, desde a remoção de certas chaves até à união de outras.
+
+Após analisar os dados em questão, foi possível observar que existia um grande número de chaves em objetos que pouco contribuíam para o objetivo do website desejado. Apenas um número muito reduzido de objetos, abaixo de 5%, utilizava essas chaves para organizar os dados. Por esse motivo, decidiu-se remover essas chaves, a fim de obter uma melhor generalização dos diferentes conjuntos de dados e simplificar a gestão dos dados.
+
+Outra forma de melhorar a generalização da informação foi a criação de uma nova chave denominada "Mais Informações". Nesta chave, é reunida toda a informação proveniente de chaves que apareciam apenas num dos conjuntos de dados. Assim, se um objeto possui esta chave, sabemos que a informação contida nela é exclusiva daquele tribunal.
+
+Algumas chaves foram agrupadas, como é o caso da chave "Área Temática". Essa chave continha entradas relacionadas, como "Área Temática 1" ou "Área Temática 2". Dessa forma, os valores dessas chaves foram agrupados numa lista, que passou a ser o valor da chave "Área Temática", resultando na eliminação das outras opções.
+
+
+Finalmente, como mencionado anteriormente, existe uma lista de descritores. Esses descritores são obtidos de cada objeto, exigindo um processamento dos descritores existentes. Em alguns casos, um descritor era composto por vários termos separados por pontos numa *string*. Além disso, havia casos em que apenas um ponto era adicionado no final, o qual foi removido. Para concluir esse processamento, foram removidos os descritores presentes em menos de 0,1% dos objetos existentes. Essa redução visa ajudar na generalização dos descritores e acelerar o processo de filtragem por descritores. Embora essa exclusão afete um número bastante reduzido de objetos, ela reduz consideravelmente o número total de descritores na base de dados.
+
+## Base de Dados
+
+Tendo em conta o processamento mencionado anteriormente, o modelo que representa a lista de acórdãos possui 32 chaves, das quais 4 chaves ("Processo", "Data do Acordão", "Descritores" e "tribunal") são comuns a todos os objetos, sendo sempre necessárias ao adicionar um novo acórdão. Dessa forma, o modelo final possui as seguintes chaves:
+
+*   "Ano da Publicação": String;
+*   "Contencioso": String;
+*   "Data": String;
+*   "Data de Entrada": String;
+*   "Data do Acordão": String;
+*   "Decisão": String;
+*   "Decisão Texto Integral": String;
+*   "Descritores": Lista;
+*   "Indicações Eventuais": String;
+*   "Jurisprudência Nacional": String;
+*   "Legislação Nacional": String;
+*   "Magistrado": String;
+*   "Meio Processual": String;
+*   "Nº Convencional": String;
+*   "Nº Processo/TAF": String;
+*   "Nº do Documento": String;
+*   "Objecto": String;
+*   "Privacidade": String;
+*   "Processo": String;
+*   "Recorrente": String;
+*   "Recorrido": Lista;
+*   "Referência a Doutrina": String;
+*   "Relator": String;
+*   "Secção": String;
+*   "Sumário": String;
+*   "Texto Integral": String;
+*   "Tribunal": String;
+*   "Tribunal Recurso": String;
+*   "Votação": String;
+*   "tribunal": String;
+*   "Área Temática": Lista;
+*   "Mais Informação": String.
+
+Para a lista de descritores, cada objeto na base de dados contém apenas o nome do descritor e uma chave automaticamente gerada pelo *MongoDB*.
+
+Para guardar informações sobre os utilizadores do website, foi criada uma base de dados separada contendo apenas informações relacionadas aos utilizadores, como o nome de utilizador, o email e a palavra-passe. Além disso, também foi guardado o nível de acesso de cada utilizador e a lista de acórdãos que cada utilizador adicionou aos seus favoritos. O modelo resultante é o seguinte:
+
+*   "email", String;
+*   "name": String;
+*   "username": String;
+*   "password": Lista;
+*   "afiliation": String;
+*   "dateCreated: String;
+*   "level": String;
+*   "lastAccess": String;
+*   "favorites": Lista.
 
 ## Features do website
 
